@@ -1,14 +1,15 @@
 import "./App.css";
 import React from "react";
-import { Fragment } from "react";
 
-import Header from "./component/Header";
-import HeroHeader from "./component/homepage/HeroHeader";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import useScript from "./hooks/useScript";
-import FeatureProduct from "./component/homepage/FeatureProduct";
+
+import Header from "./component/Header";
 import Footer from "./component/Footer";
-import Banner from "./component/homepage/Banner";
+
+import Home from "./component/homepage/Home";
+import Signin from "./component/SignInOut/Signin";
 
 function App() {
   useScript("asset/js/jquery-3.3.1.min.js");
@@ -22,15 +23,14 @@ function App() {
   useScript("asset/js/main.js");
 
   return (
-    <Fragment>
+    <BrowserRouter>
       <Header />
-      <HeroHeader />
-
-      <FeatureProduct />
-      <Banner />
-
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/signin" element={<Signin />} />
+      </Routes>
       <Footer />
-    </Fragment>
+    </BrowserRouter>
   );
 }
 

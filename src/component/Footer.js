@@ -64,7 +64,7 @@ const Footer = () => {
               <form action="#">
                 <input type="text" placeholder="Nhập email của bạn" />
                 <button type="submit" className="site-btn">
-                  Nhận thông tin
+                  Đăng ký
                 </button>
               </form>
               <div className="footer__widget__social">
