@@ -1,15 +1,36 @@
 import "./App.css";
+import React from "react";
+import { Fragment } from "react";
 
-import { DropdownButton } from "react-bootstrap";
-import { Dropdown } from "react-bootstrap";
+import Header from "./component/Header";
+import HeroHeader from "./component/homepage/HeroHeader";
+
+import useScript from "./hooks/useScript";
+import FeatureProduct from "./component/homepage/FeatureProduct";
+import Footer from "./component/Footer";
+import Banner from "./component/homepage/Banner";
 
 function App() {
+  useScript("asset/js/jquery-3.3.1.min.js");
+  useScript("asset/js/bootstrap.min.js");
+  useScript("asset/js/jquery.nice-select.min.js");
+  useScript("asset/js/jquery-ui.min.js");
+  useScript("asset/js/jquery.slicknav.js");
+  useScript("asset/js/mixitup.min.js");
+  useScript("asset/js/owl.carousel.min.js");
+
+  useScript("asset/js/main.js");
+
   return (
-    <DropdownButton id="dropdown-basic-button" title="Dropdown button">
-      <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-      <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-      <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-    </DropdownButton>
+    <Fragment>
+      <Header />
+      <HeroHeader />
+
+      <FeatureProduct />
+      <Banner />
+
+      <Footer />
+    </Fragment>
   );
 }
 
