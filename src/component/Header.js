@@ -48,7 +48,7 @@ const Header = () => {
                   </ul>
                 </div>
                 <div className="header__top__right__auth">
-                  <a href="/">
+                  <a href="/signin">
                     <i className="fa fa-user"></i> Đăng Nhập
                   </a>
                 </div>
@@ -61,7 +61,7 @@ const Header = () => {
         <div className="row">
           <div className="col-lg-3">
             <div className="header__logo">
-              <a href="//index.html">
+              <a href="/">
                 <img src="asset/img/logo.png" alt="" />
               </a>
             </div>
@@ -70,7 +70,7 @@ const Header = () => {
             <nav className="header__menu">
               <ul>
                 <li className="active">
-                  <a href="//index.html">Trang chủ</a>
+                  <a href="/">Trang chủ</a>
                 </li>
                 <li>
                   <a href="//shop-grid.html">Cửa hàng</a>

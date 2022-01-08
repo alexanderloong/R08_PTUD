@@ -1,6 +1,7 @@
 import React from "react";
+import NumberFormat from "react-number-format";
 
-const Signin = () => {
+const Signup = () => {
   return (
     <section className="ftco-section">
       <div className="container">
@@ -10,7 +11,7 @@ const Signin = () => {
               <div className="login-wrap p-4 p-md-5">
                 <div className="d-flex">
                   <div className="w-100">
-                    <h3 className="mb-4">Đăng Nhập</h3>
+                    <h3 className="mb-4">Đăng Ký</h3>
                   </div>
                   <div className="w-100">
                     <p className="social-media d-flex justify-content-end">
@@ -33,7 +34,44 @@ const Signin = () => {
                   <div className="form-group mt-3">
                     <input type="text" className="form-control" required />
                     <label className="form-control-placeholder" type="username">
-                      Số điện thoại/Email
+                      Số điện thoại
+                    </label>
+                  </div>
+                  <div className="form-group mt-3">
+                    <input type="text" className="form-control" required />
+                    <label className="form-control-placeholder" type="username">
+                      Email
+                    </label>
+                  </div>
+                  <div className="form-group mt-3">
+                    <input type="text" className="form-control" required />
+                    <label className="form-control-placeholder" type="name">
+                      Họ và tên
+                    </label>
+                  </div>
+                  <div className="form-group mt-3">
+                    <NumberFormat
+                      className="form-control"
+                      format="##/##/####"
+                      mask={["D", "D", "M", "M", "Y", "Y", "Y", "Y"]}
+                      required
+                    />
+                    <label className="form-control-placeholder" type="birthday">
+                      Ngày sinh
+                    </label>
+                  </div>
+                  <div className="form-group mt-3">
+                    <NumberFormat
+                      className="form-control"
+                      format="#### ### ### "
+                      mask="_"
+                      required
+                    />
+                    <label
+                      className="form-control-placeholder"
+                      type="phonenumber"
+                    >
+                      Số điện thoại
                     </label>
                   </div>
                   <div className="form-group">
@@ -52,31 +90,31 @@ const Signin = () => {
                     ></span>
                   </div>
                   <div className="form-group">
+                    <input
+                      id="password-field"
+                      type="password"
+                      className="form-control"
+                      required
+                    />
+                    <label className="form-control-placeholder" type="password">
+                      Xác Nhận Mật khẩu
+                    </label>
+                    <span
+                      toggle="#password-field"
+                      className="fa fa-fw fa-eye field-icon toggle-password"
+                    ></span>
+                  </div>
+                  <div className="form-group">
                     <button
                       type="submit"
                       className="form-control btn btn-primary rounded submit px-3"
                     >
-                      Đăng nhập
+                      Đăng ký
                     </button>
-                  </div>
-                  <div className="form-group d-md-flex">
-                    <div className="w-50 text-left">
-                      <label className="checkbox-wrap checkbox-primary mb-0">
-                        Nhớ mật khẩu
-                        <input type="checkbox" defaultChecked />
-                        <span className="checkmark"></span>
-                      </label>
-                    </div>
-                    <div className="w-50 text-md-right">
-                      <a href="/">Quên mật khẩu</a>
-                    </div>
                   </div>
                 </form>
                 <div className="text-center">
-                  Bạn chưa có tài khoản?
-                  <a className="text-center" href="/signup">
-                    Đăng ký
-                  </a>{" "}
+                  Bạn đã có tài khoản? <a href="/signin">Đăng Nhập</a>
                 </div>
               </div>
             </div>
@@ -87,4 +125,4 @@ const Signin = () => {
   );
 };
 
-export default Signin;
+export default Signup;

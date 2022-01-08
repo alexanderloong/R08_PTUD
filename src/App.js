@@ -10,6 +10,7 @@ import Footer from "./component/Footer";
 
 import Home from "./component/homepage/Home";
 import Signin from "./component/SignInOut/Signin";
+import Signup from "./component/SignInOut/Signup";
 
 function App() {
   useScript("asset/js/jquery-3.3.1.min.js");
@@ -19,7 +20,6 @@ function App() {
   useScript("asset/js/jquery.slicknav.js");
   useScript("asset/js/mixitup.min.js");
   useScript("asset/js/owl.carousel.min.js");
-
   useScript("asset/js/main.js");
 
   return (
@@ -28,6 +28,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/signin" element={<Signin />} />
+        <Route path="/signup" element={<Signup />} />
       </Routes>
       <Footer />
     </BrowserRouter>
