@@ -1,6 +1,6 @@
 import React from "react";
 
-import NumberFormat from "react-number-format";
+import PriceFormat from "../PriceFormat";
 
 const FeatureProduct = () => {
   let product = [
@@ -87,12 +87,7 @@ const FeatureProduct = () => {
             <a href="/">{item.name}</a>
           </h6>
           <h5>
-            <NumberFormat
-              thousandSeparator={true}
-              suffix={"₫"}
-              value={item.price}
-              displayType={"text"}
-            />
+            <PriceFormat price={item.price} />
           </h5>
         </div>
       </div>

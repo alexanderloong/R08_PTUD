@@ -1,6 +1,6 @@
 import React from "react";
 
-import NumberFormat from "react-number-format";
+import PriceFormat from "./PriceFormat";
 
 const Header = () => {
   return (
@@ -104,19 +104,13 @@ const Header = () => {
                   </a>
                 </li>
                 <li>
-                  <a href="/shopping-cart">
+                  <a href="/shoping-cart">
                     <i className="fa fa-shopping-bag"></i> <span>3</span>
                   </a>
                 </li>
               </ul>
               <div className="header__cart__price">
-                Giỏ hàng:{" "}
-                <NumberFormat
-                  value={150000}
-                  displayType={"text"}
-                  thousandSeparator={true}
-                  suffix={"₫"}
-                />
+                Giỏ hàng: <PriceFormat price={150000} />
               </div>
             </div>
           </div>

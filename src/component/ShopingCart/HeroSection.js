@@ -1,6 +1,6 @@
 import React from "react";
 
-const HeroHeader = () => {
+const HeroSection = () => {
   let listCatalog = [
     "Thịt, cá, hải sản",
     "Rau, củ, trái cây",
@@ -13,9 +13,9 @@ const HeroHeader = () => {
     "Đồ dùng gia đình",
     "Chăm sóc cá nhân",
   ];
-
   return (
-    <section className="hero">
+    /* <!-- Hero Section Begin --> */
+    <section className="hero hero-normal">
       <div className="container">
         <div className="row">
           <div className="col-lg-3">
@@ -57,28 +57,12 @@ const HeroHeader = () => {
                 </div>
               </div>
             </div>
-            <div
-              className="hero__item set-bg"
-              data-setbg="asset/img/hero/banner.jpg"
-              style={{ backgroundImage: 'url("asset/img/hero/banner.jpg")' }}
-            >
-              <div className="hero__text">
-                <span>Thực phẩm tươi</span>
-                <h2>
-                  Rau quả <br />
-                  100% Hữu cơ
-                </h2>
-                <p>Đặt hàng và giao ngay</p>
-                <a href="/" className="primary-btn">
-                  Đi đến sản phẩm
-                </a>
-              </div>
-            </div>
           </div>
         </div>
       </div>
     </section>
+    /* <!-- Hero Section End --> */
   );
 };
 
-export default HeroHeader;
+export default HeroSection;

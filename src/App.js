@@ -11,6 +11,7 @@ import Footer from "./component/Footer";
 import Home from "./component/homepage/Home";
 import Signin from "./component/SignInOut/Signin";
 import Signup from "./component/SignInOut/Signup";
+import ShopingCart from "./component/ShopingCart/ShopingCart";
 
 function App() {
   useScript("asset/js/jquery-3.3.1.min.js");
@@ -29,6 +30,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/signin" element={<Signin />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/shoping-cart" element={<ShopingCart />} />
       </Routes>
       <Footer />
     </BrowserRouter>
