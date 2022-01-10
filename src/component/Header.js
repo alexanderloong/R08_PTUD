@@ -104,7 +104,7 @@ const Header = () => {
                   </a>
                 </li>
                 <li>
-                  <a href="/">
+                  <a href="/shopping-cart">
                     <i className="fa fa-shopping-bag"></i> <span>3</span>
                   </a>
                 </li>

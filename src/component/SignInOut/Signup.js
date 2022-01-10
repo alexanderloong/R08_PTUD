@@ -31,36 +31,7 @@ const Signup = () => {
                   </div>
                 </div>
                 <form action="#" className="signin-form">
-                  <div className="form-group mt-3">
-                    <input type="text" className="form-control" required />
-                    <label className="form-control-placeholder" type="username">
-                      Số điện thoại
-                    </label>
-                  </div>
-                  <div className="form-group mt-3">
-                    <input type="text" className="form-control" required />
-                    <label className="form-control-placeholder" type="username">
-                      Email
-                    </label>
-                  </div>
-                  <div className="form-group mt-3">
-                    <input type="text" className="form-control" required />
-                    <label className="form-control-placeholder" type="name">
-                      Họ và tên
-                    </label>
-                  </div>
-                  <div className="form-group mt-3">
-                    <NumberFormat
-                      className="form-control"
-                      format="##/##/####"
-                      mask={["D", "D", "M", "M", "Y", "Y", "Y", "Y"]}
-                      required
-                    />
-                    <label className="form-control-placeholder" type="birthday">
-                      Ngày sinh
-                    </label>
-                  </div>
-                  <div className="form-group mt-3">
+                  <div className="form-group mt-4">
                     <NumberFormat
                       className="form-control"
                       format="#### ### ### "
@@ -74,7 +45,31 @@ const Signup = () => {
                       Số điện thoại
                     </label>
                   </div>
-                  <div className="form-group">
+                  <div className="form-group mt-4">
+                    <input type="text" className="form-control" required />
+                    <label className="form-control-placeholder" type="username">
+                      Email
+                    </label>
+                  </div>
+                  <div className="form-group mt-4">
+                    <input type="text" className="form-control" required />
+                    <label className="form-control-placeholder" type="name">
+                      Họ và tên
+                    </label>
+                  </div>
+                  <div className="form-group mt-4">
+                    <NumberFormat
+                      className="form-control"
+                      format="##/##/####"
+                      mask={["D", "D", "M", "M", "Y", "Y", "Y", "Y"]}
+                      required
+                    />
+                    <label className="form-control-placeholder" type="birthday">
+                      Ngày sinh
+                    </label>
+                  </div>
+
+                  <div className="form-group mt-4">
                     <input
                       id="password-field"
                       type="password"
@@ -89,7 +84,7 @@ const Signup = () => {
                       className="fa fa-fw fa-eye field-icon toggle-password"
                     ></span>
                   </div>
-                  <div className="form-group">
+                  <div className="form-group mt-4">
                     <input
                       id="password-field"
                       type="password"

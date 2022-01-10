@@ -30,13 +30,13 @@ const Signin = () => {
                   </div>
                 </div>
                 <form action="#" className="signin-form">
-                  <div className="form-group mt-3">
+                  <div className="form-group mt-5">
                     <input type="text" className="form-control" required />
                     <label className="form-control-placeholder" type="username">
                       Số điện thoại/Email
                     </label>
                   </div>
-                  <div className="form-group">
+                  <div className="form-group mt-4">
                     <input
                       id="password-field"
                       type="password"
@@ -75,7 +75,7 @@ const Signin = () => {
                 <div className="text-center">
                   Bạn chưa có tài khoản?
                   <a className="text-center" href="/signup">
-                    Đăng ký
+                    &nbsp;Đăng ký
                   </a>{" "}
                 </div>
               </div>
