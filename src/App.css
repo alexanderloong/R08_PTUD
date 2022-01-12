@@ -42,7 +42,7 @@
   border-color: rgb(127, 173, 57);
 }
 
-.AccountCus {
+.detail-tab {
   background-color: white;
   border-color: rgba(0, 0, 0, 0.125);
   border-style: solid;
@@ -50,4 +50,13 @@
   border-width: 1px;
   padding: 3rem;
   margin-bottom: 3rem;
+}
+
+.modal-content {
+  width: 1000px;
+  padding: 10px;
+}
+
+.modal-dialog {
+  margin-inline-start: 460px;
 }

@@ -3,7 +3,7 @@ import FormAddress from "./FormAddress";
 
 const AccountCus = () => {
   return (
-    <form className="AccountCus">
+    <form className="detail-tab">
       <h3>Cá Nhân</h3>
       <hr />
       <div className="row">
@@ -35,9 +35,11 @@ const AccountCus = () => {
         </div>
       </div>
 
-      <button type="submit" className="btn btn-primary">
-        Submit
-      </button>
+      <div className="text-center">
+        <button type="submit" className="btn btn-primary">
+          Thay đổi
+        </button>
+      </div>
     </form>
   );
 };

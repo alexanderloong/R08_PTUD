@@ -12,4 +12,26 @@ const PriceFormat = (props) => {
   );
 };
 
-export default PriceFormat;
+const DateFormat = () => {
+  return (
+    <NumberFormat
+      className="form-control"
+      format="##/##/####"
+      mask={["D", "D", "M", "M", "Y", "Y", "Y", "Y"]}
+      required
+    />
+  );
+};
+
+const PhoneNumberFormat = () => {
+  return (
+    <NumberFormat
+      className="form-control"
+      format="#### ### ### "
+      mask="_"
+      required
+    />
+  );
+};
+
+export { PriceFormat, DateFormat, PhoneNumberFormat };

@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import PriceFormat from "../PriceFormat";
+import { PriceFormat } from "../PriceFormat";
 import Breadcrumb from "./Breadcrumb";
 import HeroSection from "./HeroSection";
 import ItemCart from "./ItemCart";

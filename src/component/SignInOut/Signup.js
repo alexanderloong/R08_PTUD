@@ -1,5 +1,6 @@
 import React from "react";
-import NumberFormat from "react-number-format";
+
+import { DateFormat, PhoneNumberFormat } from "../PriceFormat";
 
 const Signup = () => {
   return (
@@ -32,12 +33,7 @@ const Signup = () => {
                 </div>
                 <form action="#" className="signin-form">
                   <div className="form-group mt-4">
-                    <NumberFormat
-                      className="form-control"
-                      format="#### ### ### "
-                      mask="_"
-                      required
-                    />
+                    <PhoneNumberFormat />
                     <label
                       className="form-control-placeholder"
                       type="phonenumber"
@@ -58,12 +54,7 @@ const Signup = () => {
                     </label>
                   </div>
                   <div className="form-group mt-4">
-                    <NumberFormat
-                      className="form-control"
-                      format="##/##/####"
-                      mask={["D", "D", "M", "M", "Y", "Y", "Y", "Y"]}
-                      required
-                    />
+                    <DateFormat />
                     <label className="form-control-placeholder" type="birthday">
                       Ngày sinh
                     </label>
