@@ -36,3 +36,18 @@
     transform: rotate(360deg);
   }
 }
+
+.list-group-item.active {
+  background-color: rgb(127, 173, 57);
+  border-color: rgb(127, 173, 57);
+}
+
+.AccountCus {
+  background-color: white;
+  border-color: rgba(0, 0, 0, 0.125);
+  border-style: solid;
+  border-radius: 5px;
+  border-width: 1px;
+  padding: 3rem;
+  margin-bottom: 3rem;
+}

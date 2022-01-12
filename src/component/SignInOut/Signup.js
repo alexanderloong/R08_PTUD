@@ -11,7 +11,7 @@ const Signup = () => {
               <div className="login-wrap p-4 p-md-5">
                 <div className="d-flex">
                   <div className="w-100">
-                    <h3 className="mb-4">Đăng Ký</h3>
+                    <h3>Đăng Ký</h3>
                   </div>
                   <div className="w-100">
                     <p className="social-media d-flex justify-content-end">
