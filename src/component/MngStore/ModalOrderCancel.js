@@ -16,22 +16,21 @@ const ModalOrderCancel = (props) => {
               aria-label="Close"
             ></button>
           </div>
-          <div className="modal-body">
-            <textarea
-              class="form-control"
-              id="exampleFormControlTextarea1"
-              rows="3"
-            />
-          </div>
-          <div className="modal-footer">
-            <button
-              type="button"
-              className="btn btn-primary mx-3"
-              data-bs-dismiss="modal"
-            >
-              Xác nhận huỷ đơn
-            </button>
-          </div>
+          <form>
+            <div className="modal-body">
+              <textarea
+                className="form-control"
+                id="exampleFormControlTextarea1"
+                rows="3"
+                required
+              />
+            </div>
+            <div className="modal-footer">
+              <button type="submit" className="btn btn-primary mx-3">
+                Xác nhận huỷ đơn
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>

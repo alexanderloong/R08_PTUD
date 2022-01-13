@@ -106,14 +106,13 @@ const MngOrder = () => {
                     }
                     data-bs-toggle="modal"
                     data-bs-target={`#${item.code}`}
-                    color
                   >
-                    Chi tiết
+                    {item.status === 1 ? "Chờ xác nhận" : "Chi tiết"}
                   </button>
                   {/* Button cancel */}
                   <button
                     type="button"
-                    className="btn btn-invisible mx-2"
+                    className="btn mx-2"
                     data-bs-toggle="modal"
                     data-bs-target={`#${item.code}_`}
                     disabled={item.status === 1 ? false : true}
