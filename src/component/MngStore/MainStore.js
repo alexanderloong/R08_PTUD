@@ -77,6 +77,9 @@ const MainStore = () => {
           >
             <i className="fa fa-cog" /> Cài đặt tài khoản
           </button>
+          <button type="button" className={nonActiveButton}>
+            <i className="fa fa-sign-out" /> Đăng xuất
+          </button>
         </section>
 
         <section className="col-lg-9">{renderTab(stateTab)}</section>

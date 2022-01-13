@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import { PriceFormat } from "../Global/PriceFormat";
+import ModalAddProduct from "./ModalAddProduct";
 
 let listProduct = [
   {
@@ -60,6 +61,17 @@ const MngProduct = () => {
           <select className="form-select form-select-lg">
             <option value="5">Tất cả</option>
           </select>
+        </div>
+        <div>
+          <button
+            type="button"
+            className="btn btn-success"
+            data-bs-toggle="modal"
+            data-bs-target="#addProduct"
+          >
+            Thêm sản phẩm
+          </button>
+          <ModalAddProduct />
         </div>
       </div>
       <hr />
