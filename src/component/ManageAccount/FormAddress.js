@@ -8,7 +8,7 @@ let allProvinces = subvn.getProvinces();
 let allDistricts, allWard;
 let tinh, huyen, xa;
 
-const FormAddress = () => {
+const FormAddress = (props) => {
   // Local State
   const [stateTinh, setTinh] = useState(0);
   const [stateQuan, setQuan] = useState(0);
@@ -48,35 +48,53 @@ const FormAddress = () => {
         <label>Tỉnh/Thành phố</label>
         <select
           className="form-select form-select-lg"
-          onChange={(e) => setTinh(e.target.value)}
+          name="province"
+          onChange={(e) => {
+            setTinh(e.target.value);
+            props.handle(e);
+          }}
         >
           <option value="0">-</option>
           {tinh}
         </select>
       </div>
-      <div className="form-group">
+      <div className="form-group  ">
         <label>Quận/Huyện</label>
         <select
           className="form-select form-select-lg"
-          onChange={(e) => setQuan(e.target.value)}
+          name="district"
+          onChange={(e) => {
+            setQuan(e.target.value);
+            props.handle(e);
+          }}
         >
           <option value="0">-</option>
           {huyen}
         </select>
       </div>
-      <div className="form-group">
+      <div className="form-group ">
         <label>Phường/Xã</label>
         <select
+          name="ward"
           className="form-select form-select-lg"
-          onChange={(e) => setXa(e.target.value)}
+          onChange={(e) => {
+            setXa(e.target.value);
+            props.handle(e);
+          }}
         >
           <option value="0">-</option>
           {xa}
         </select>
       </div>
-      <div className="form-group">
+      <div className="form-group ">
         <label>Số nhà và đường</label>
-        <input type="text" className="form-control" required />
+        <input
+          type="text"
+          className="form-control"
+          name="numberStreet"
+          onChange={(e) => props.handle(e)}
+          required
+        />
       </div>
     </Fragment>
   );
