@@ -7,7 +7,7 @@ import RouteCustomer from "./component/router/RouteCustomer";
 import RouteStore from "./component/router/RouteStore";
 
 function App() {
-  let statusUser = 1;
+  let statusUser = 2;
   return (
     <BrowserRouter>
       {statusUser === 1 ? (

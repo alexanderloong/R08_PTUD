@@ -87,3 +87,13 @@
 .featured__item__pic__hover {
   bottom: -70px;
 }
+
+.btn-invisible {
+  background: transparent;
+  border: none !important;
+  font-size: 0;
+}
+
+.update-product {
+  width: 90px;
+}
