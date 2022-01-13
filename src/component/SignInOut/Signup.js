@@ -1,6 +1,6 @@
 import React from "react";
 
-import { DateFormat, PhoneNumberFormat } from "../PriceFormat";
+import { DateFormat, PhoneNumberFormat } from "../Global/PriceFormat";
 
 const Signup = () => {
   return (

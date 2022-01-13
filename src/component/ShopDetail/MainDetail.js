@@ -1,12 +1,9 @@
 import React, { Fragment } from "react";
-
-import HeroHeader from "./HeroHeader";
-import FeatureProduct from "./FeatureProduct";
-import Banner from "./Banner";
+import SectionDetail from "./SectionDetail";
 
 import useScript from "../../hooks/useScript";
 
-const Home = () => {
+const MainDetail = () => {
   useScript("asset/js/jquery-3.3.1.min.js");
   useScript("asset/js/bootstrap.min.js");
   useScript("asset/js/jquery.nice-select.min.js");
@@ -15,13 +12,11 @@ const Home = () => {
   useScript("asset/js/mixitup.min.js");
   useScript("asset/js/owl.carousel.min.js");
   useScript("asset/js/main.js");
-
   return (
     <Fragment>
-      <HeroHeader /> <FeatureProduct />
-      <Banner />
+      <SectionDetail />
     </Fragment>
   );
 };
 
-export default Home;
+export default MainDetail;

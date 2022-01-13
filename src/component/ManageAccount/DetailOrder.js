@@ -1,5 +1,5 @@
 import React from "react";
-import { PriceFormat } from "../PriceFormat";
+import { PriceFormat } from "../Global/PriceFormat";
 
 let detailOrder = [
   {

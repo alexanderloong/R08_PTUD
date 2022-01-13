@@ -1,36 +1,48 @@
 import React, { Fragment } from "react";
-import { PriceFormat } from "../PriceFormat";
+import { PriceFormat } from "../Global/PriceFormat";
 import Breadcrumb from "./Breadcrumb";
-import HeroSection from "./HeroSection";
+import HeroSection from "../Global/HeroSection";
 import ItemCart from "./ItemCart";
 
-const ShopingCart = () => {
-  let product = [
-    {
-      img: "asset/img/cart/cart-1.jpg",
-      name: "Rau quả 1",
-      type: "combo",
-      quantity: 1,
-      price: 150000,
-    },
-    {
-      img: "asset/img/cart/cart-2.jpg",
-      name: "Rau quả 2",
-      type: "combo",
-      quantity: 2,
-      price: 150000,
-    },
-    {
-      img: "asset/img/cart/cart-3.jpg",
-      name: "Chuối",
-      type: "fruits",
-      quantity: 2,
-      price: 150000,
-    },
-  ];
+import useScript from "../../hooks/useScript";
 
-  let totalPrice = 0;
-  product.map((item) => (totalPrice += item.price * item.quantity));
+let product = [
+  {
+    img: "asset/img/cart/cart-1.jpg",
+    name: "Rau quả 1",
+    type: "combo",
+    quantity: 1,
+    price: 150000,
+  },
+  {
+    img: "asset/img/cart/cart-2.jpg",
+    name: "Rau quả 2",
+    type: "combo",
+    quantity: 2,
+    price: 150000,
+  },
+  {
+    img: "asset/img/cart/cart-3.jpg",
+    name: "Chuối",
+    type: "fruits",
+    quantity: 2,
+    price: 150000,
+  },
+];
+
+let totalPrice = 0;
+product.map((item) => (totalPrice += item.price * item.quantity));
+
+const ShopingCart = () => {
+  useScript("asset/js/jquery-3.3.1.min.js");
+  useScript("asset/js/bootstrap.min.js");
+  useScript("asset/js/jquery.nice-select.min.js");
+  useScript("asset/js/jquery-ui.min.js");
+  useScript("asset/js/jquery.slicknav.js");
+  useScript("asset/js/mixitup.min.js");
+  useScript("asset/js/owl.carousel.min.js");
+  useScript("asset/js/main.js");
+
   return (
     <Fragment>
       <HeroSection />

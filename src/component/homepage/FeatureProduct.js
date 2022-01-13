@@ -1,6 +1,6 @@
 import React from "react";
 
-import { PriceFormat } from "../PriceFormat";
+import { PriceFormat } from "../Global/PriceFormat";
 
 const FeatureProduct = () => {
   let product = [
