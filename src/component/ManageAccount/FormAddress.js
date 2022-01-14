@@ -16,7 +16,7 @@ const FormAddress = (props) => {
 
   // Hanle Tinh/ThanhPho
   tinh = allProvinces.map((item, index) => (
-    <option key={index} value={item.code}>
+    <option key={index} value={JSON.stringify(item)}>
       {item.name}
     </option>
   ));
@@ -26,7 +26,7 @@ const FormAddress = (props) => {
 
   if (allDistricts !== undefined) {
     huyen = allDistricts.map((item, index) => (
-      <option key={index} value={item.code}>
+      <option key={index} value={JSON.stringify(item)}>
         {item.name}
       </option>
     ));
@@ -37,7 +37,7 @@ const FormAddress = (props) => {
 
   if (allWard !== undefined) {
     xa = allWard.map((item, index) => (
-      <option key={index} value={item.code}>
+      <option key={index} value={JSON.stringify(item)}>
         {item.name}
       </option>
     ));
@@ -48,13 +48,13 @@ const FormAddress = (props) => {
         <label>Tỉnh/Thành phố</label>
         <select
           className="form-select form-select-lg"
-          name="province"
+          name="city"
           onChange={(e) => {
-            setTinh(e.target.value);
+            setTinh(JSON.parse(e.target.value).code);
             props.handle(e);
           }}
         >
-          <option value="0">-</option>
+          <option value="0">{props.city !== null ? props.city : "-"}</option>
           {tinh}
         </select>
       </div>
@@ -64,11 +64,13 @@ const FormAddress = (props) => {
           className="form-select form-select-lg"
           name="district"
           onChange={(e) => {
-            setQuan(e.target.value);
+            setQuan(JSON.parse(e.target.value).code);
             props.handle(e);
           }}
         >
-          <option value="0">-</option>
+          <option value="0">
+            {props.district !== null ? props.district : "-"}
+          </option>
           {huyen}
         </select>
       </div>
@@ -78,23 +80,13 @@ const FormAddress = (props) => {
           name="ward"
           className="form-select form-select-lg"
           onChange={(e) => {
-            setXa(e.target.value);
+            setXa(JSON.parse(e.target.value).code);
             props.handle(e);
           }}
         >
-          <option value="0">-</option>
+          <option value="0">{props.ward !== null ? props.ward : "-"}</option>
           {xa}
         </select>
-      </div>
-      <div className="form-group ">
-        <label>Số nhà và đường</label>
-        <input
-          type="text"
-          className="form-control"
-          name="numberStreet"
-          onChange={(e) => props.handle(e)}
-          required
-        />
       </div>
     </Fragment>
   );

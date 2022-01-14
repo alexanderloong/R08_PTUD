@@ -2,12 +2,17 @@ import {
   ADD_TO_CART,
   CHANGE_QUANTITY_CART,
   DELETE_ITEM_CART,
+  GET_CATALOG,
+  LOGIN_USER,
   UPDATE_TOTALCART_CART,
 } from "../context/constants";
 
 const initialState = {
   itemCart: [],
   quantityItem: 0,
+  user: null,
+  typeUser: 0,
+  catalog: [],
 };
 
 function cartReducer(state, action) {
@@ -43,7 +48,12 @@ function cartReducer(state, action) {
         ...state,
         itemCart: updItemCart2,
       };
-
+    case LOGIN_USER:
+      return {
+        ...state,
+        user: action.payload.data,
+        typeUser: action.payload.type,
+      };
     default:
       throw new Error("Invalid action!");
   }

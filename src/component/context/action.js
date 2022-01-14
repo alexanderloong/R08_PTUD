@@ -2,6 +2,8 @@ import {
   ADD_TO_CART,
   CHANGE_QUANTITY_CART,
   DELETE_ITEM_CART,
+  GET_CATALOG,
+  LOGIN_USER,
   UPDATE_TOTALCART_CART,
 } from "./constants";
 
@@ -22,5 +24,10 @@ export const updateTotalCart = (payload) => ({
 
 export const deleteItemCart = (payload) => ({
   type: DELETE_ITEM_CART,
+  payload,
+});
+
+export const loginUser = (payload) => ({
+  type: LOGIN_USER,
   payload,
 });

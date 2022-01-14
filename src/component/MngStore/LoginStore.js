@@ -3,9 +3,9 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { loginUser } from "../context/action";
 import { cartContext } from "../context/cartContext";
 
-const Signin = () => {
+const LoginStore = () => {
   // Context
-  const { postLogin, dispatchCart } = useContext(cartContext);
+  const { postRegisterStore, dispatchCart } = useContext(cartContext);
 
   // State
   const [state, setState] = useState();
@@ -27,12 +27,13 @@ const Signin = () => {
   // Handle submit
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let response = await postLogin(state);
+    let response = await postRegisterStore(state);
 
-    if (response.data.code === 0) {
-      await dispatchCart(loginUser({ data: response.data.payload, type: 0 }));
+    if (response.code === 0) {
+      await dispatchCart(loginUser({ data: response.payload, type: 1 }));
       navigator("/");
     }
+
     console.log(state);
     console.log(response);
   };
@@ -47,7 +48,7 @@ const Signin = () => {
               <div className="login-wrap p-4 p-md-5">
                 <div className="d-flex">
                   <div className="w-100">
-                    <h3>Đăng Nhập</h3>
+                    <h3>Đăng Nhập Dành Cho Cửa Hàng</h3>
                   </div>
                   <div className="w-100">
                     <p className="social-media d-flex justify-content-end">
@@ -128,8 +129,8 @@ const Signin = () => {
                   </a>{" "}
                 </div>
                 <div className="text-center">
-                  Đăng nhập dành cho cửa hàng
-                  <a className="text-center" href="/loginStore">
+                  Đăng nhập dành cho khách hàng
+                  <a className="text-center" href="/signin">
                     &nbsp;Tại Đây
                   </a>{" "}
                 </div>
@@ -142,4 +143,4 @@ const Signin = () => {
   );
 };
 
-export default Signin;
+export default LoginStore;

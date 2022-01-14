@@ -11,6 +11,8 @@ import MngCus from "../ManageAccount/MainCus";
 import MainGridProduct from "../ShopGrid/MainGridProduct";
 import MainDetail from "../ShopDetail/MainDetail";
 import { Route, Routes } from "react-router-dom";
+import RegisterStore from "../MngStore/registerStore";
+import LoginStore from "../MngStore/LoginStore";
 
 const RouteCustomer = () => {
   return (
@@ -24,6 +26,8 @@ const RouteCustomer = () => {
         <Route path="profile" element={<MngCus />} />
         <Route path="search" element={<MainGridProduct />} />
         <Route path="detail" element={<MainDetail />} />
+        <Route path="registerStore" element={<RegisterStore />} />
+        <Route path="loginStore" element={<LoginStore />} />
       </Routes>
       <Footer />
     </Fragment>

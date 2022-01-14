@@ -1,19 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
+import { cartContext } from "../context/cartContext";
 
 const HeroHeader = () => {
-  let listCatalog = [
-    "Thịt, cá, hải sản",
-    "Rau, củ, trái cây",
-    "Đồ uống các loại",
-    "Sữa uống các loại",
-    "Bánh kẹo các loại",
-    "Gạo, bột, đồ khô",
-    "Đồ mát, đông lạnh",
-    "Chăm sóc cá nhân",
-    "Đồ dùng gia đình",
-    "Chăm sóc cá nhân",
-  ];
+  // Context
+  const { stateCatalog } = useContext(cartContext);
 
+  // Render
   return (
     <section className="hero">
       <div className="container">
@@ -25,9 +17,9 @@ const HeroHeader = () => {
                 <span>Các ngành hàng</span>
               </div>
               <ul>
-                {listCatalog.map((item, index) => (
+                {stateCatalog.map((item, index) => (
                   <li key={index}>
-                    <a href="/">{item}</a>
+                    <a href="/">{item.category_name}</a>
                   </li>
                 ))}
               </ul>

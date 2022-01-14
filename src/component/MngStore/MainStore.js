@@ -77,7 +77,11 @@ const MainStore = () => {
           >
             <i className="fa fa-cog" /> Cài đặt tài khoản
           </button>
-          <button type="button" className={nonActiveButton}>
+          <button
+            type="button"
+            onClick={() => (window.location.href = "http://localhost:3000/")}
+            className={nonActiveButton}
+          >
             <i className="fa fa-sign-out" /> Đăng xuất
           </button>
         </section>

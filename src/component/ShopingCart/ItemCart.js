@@ -1,13 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { PriceFormat } from "../Global/PriceFormat";
 import { changeQuantity } from "../context/action";
-
-import { useCart } from "../../hooks/hookContext";
+import { cartContext } from "../context/cartContext";
 
 import { deleteItemCart } from "../context/action";
 const ItemCart = (props) => {
   // Context
-  const [stateCart, dispatch] = useCart();
+  const { stateCart, dispatch } = useContext(cartContext);
   const { itemCart, totalCart, quantityItem } = stateCart;
 
   console.log(totalCart);

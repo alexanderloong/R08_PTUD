@@ -6,10 +6,9 @@ import { DateFormat, PhoneNumberFormat } from "../Global/PriceFormat";
 import FormAddress from "../ManageAccount/FormAddress";
 
 import { loginUser } from "../context/action";
-
-const Signup = () => {
+const RegisterStore = () => {
   // Context
-  const { stateLevel, postRegisterUser, dispatchCart } =
+  const { stateLevel, postRegisterStore, dispatchCart } =
     useContext(cartContext);
 
   //
@@ -41,11 +40,12 @@ const Signup = () => {
   const handleClick = async (e) => {
     console.log(stateInfor);
 
-    let response = await postRegisterUser(stateInfor);
-    if (response.data.code === 0) {
-      await dispatchCart(loginUser({ data: response.data.payload, type: 0 }));
-      navigator("/");
+    let response = await postRegisterStore(stateInfor);
+    if (response.code === 0) {
+      await dispatchCart(loginUser({ data: response.payload, type: 1 }));
+      navigate("/");
     }
+
     console.log(response);
   };
 
@@ -63,7 +63,7 @@ const Signup = () => {
               <div className="login-wrap p-4 p-md-5">
                 <div className="d-flex">
                   <div className="w-100">
-                    <h3>Đăng Ký</h3>
+                    <h3>Đăng ký dành cho cửa hàng</h3>
                   </div>
                   <div className="w-100">
                     <p className="social-media d-flex justify-content-end">
@@ -127,7 +127,7 @@ const Signup = () => {
                         required
                       />
                       <label className="form-control-placeholder" type="name">
-                        Họ và tên
+                        Tên cửa hàng
                       </label>
                     </div>
                     <div className="form-group mt-4">
@@ -181,20 +181,6 @@ const Signup = () => {
                         className="fa fa-fw fa-eye field-icon toggle-password"
                       ></span>
                     </div>
-                    <div className="form-group">
-                      <label>Giới tính</label>
-                      <select
-                        className="form-select form-select-lg"
-                        name="sex"
-                        onChange={handleChange}
-                        required
-                      >
-                        <option value="0">-</option>
-                        <option value={1}>Nam</option>
-                        <option value={2}>Nữ</option>
-                        <option value={3}>Khác</option>
-                      </select>
-                    </div>
                   </div>
 
                   <div className="col">
@@ -238,16 +224,10 @@ const Signup = () => {
                   </div>
                 </form>
                 <div className="text-center">
-                  Bạn đã có tài khoản? <a href="/signin">Đăng Nhập</a>
+                  Bạn đã có tài khoản? <a href="/loginStore">Đăng Nhập</a>
                 </div>
                 <div className="text-center">
-                  Đăng ký dành cho cửa hàng{" "}
-                  <button
-                    className="btn-invisible"
-                    onClick={() => navigate("/registerStore")}
-                  >
-                    Tại đây
-                  </button>
+                  Đăng ký cho khách hàng <a href="/signup">Tại đây</a>
                 </div>
               </div>
             </div>
@@ -258,4 +238,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default RegisterStore;

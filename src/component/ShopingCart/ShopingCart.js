@@ -1,16 +1,17 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useContext, useEffect } from "react";
 import { PriceFormat } from "../Global/PriceFormat";
 import Breadcrumb from "./Breadcrumb";
 import HeroSection from "../Global/HeroSection";
 import ItemCart from "./ItemCart";
 import useScript from "../../hooks/useScript";
-import { useCart } from "../../hooks/hookContext";
+
 import { updateTotalCart } from "../context/action";
+import { cartContext } from "../context/cartContext";
 
 const ShopingCart = () => {
   // Context
-  const [stateCart, dispatch] = useCart();
-  const { itemCart, totalCart, quantityItem } = stateCart;
+  const { stateCart, dispatch } = useContext(cartContext);
+  const { itemCart } = stateCart;
 
   // Variables
   let ttCart = 0;

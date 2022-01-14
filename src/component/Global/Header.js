@@ -1,15 +1,17 @@
 import React, { useContext } from "react";
 
 import { useNavigate } from "react-router-dom";
-import { useCart } from "../../hooks/hookContext";
-import { PriceFormat } from "./PriceFormat";
+import { cartContext } from "../context/cartContext";
 
 const Header = () => {
   // Router
   const navigate = useNavigate();
 
+  // Navigator
+  const navigator = useNavigate();
+
   // Context
-  const [stateCart, dispatchCart] = useCart();
+  const { stateCart } = useContext(cartContext);
   const { quantityItem } = stateCart;
   // Render
   return (
@@ -57,9 +59,15 @@ const Header = () => {
                   </ul>
                 </div>
                 <div className="header__top__right__auth">
-                  <a href="/signin">
-                    <i className="fa fa-user"></i> Đăng Nhập
-                  </a>
+                  {stateCart.user === null ? (
+                    <a href="/signin">
+                      <i className="fa fa-user"></i> Đăng Nhập
+                    </a>
+                  ) : (
+                    <a href="#" onClick={() => navigator("/profile")}>
+                      <i className="fa fa-user"></i> {stateCart.user.name}
+                    </a>
+                  )}
                 </div>
               </div>
             </div>
@@ -70,9 +78,9 @@ const Header = () => {
         <div className="row">
           <div className="col-lg-3">
             <div className="header__logo">
-              <a href="/">
+              <button className="btn-invisible" onClick={() => navigator("/")}>
                 <img src="asset/img/logo.png" alt="" />
-              </a>
+              </button>
             </div>
           </div>
           <div className="col-lg-6">

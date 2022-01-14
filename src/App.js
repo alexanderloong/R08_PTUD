@@ -1,26 +1,35 @@
 import "./App.css";
-import React from "react";
+import React, { useContext } from "react";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import RouteCustomer from "./component/router/RouteCustomer";
 import RouteStore from "./component/router/RouteStore";
-import CartContextProvider from "./component/context/cartContext";
+
 import RouteAdmin from "./component/router/RouteAdmin";
 import RouteShipper from "./component/router/RouteShipper";
 
-function App() {
-  let statusUser = 1;
-  return (
-    <CartContextProvider>
-      <BrowserRouter>
-        {/* <RouteCustomer /> */}
+import { cartContext } from "./component/context/cartContext";
 
-        {/* <RouteStore /> */}
-        {/* <RouteAdmin /> */}
-        <RouteShipper />
-      </BrowserRouter>
-    </CartContextProvider>
+function App() {
+  // Context
+  const { stateCart } = useContext(cartContext);
+  const { typeUser } = stateCart;
+
+  let renderType;
+
+  if (typeUser === 0) renderType = <RouteCustomer />;
+  else if (typeUser === 1) renderType = <RouteStore />;
+
+  // Render
+  return (
+    <BrowserRouter>
+      {renderType}
+      {/* <RouteCustomer /> */}
+      {/* <RouteStore /> */}
+      {/* <RouteAdmin /> */}
+      {/* <RouteShipper /> */}
+    </BrowserRouter>
   );
 }
 

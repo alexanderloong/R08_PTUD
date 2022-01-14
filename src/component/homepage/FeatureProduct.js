@@ -1,6 +1,6 @@
-import React from "react";
-import { useCart } from "../../hooks/hookContext";
+import React, { useContext } from "react";
 import { addToCart } from "../context/action";
+import { cartContext } from "../context/cartContext";
 
 import { PriceFormat } from "../Global/PriceFormat";
 
@@ -65,9 +65,8 @@ let product = [
 
 const FeatureProduct = () => {
   // Context
-  const [stateCart, dispathCart] = useCart();
+  const { stateCart, dispathCart } = useContext(cartContext);
   const { itemCart, totalCart, quantityItem } = stateCart;
-  console.log(stateCart);
 
   // Handle
   const handleClick = (item) => {
