@@ -7,6 +7,7 @@ import RouteCustomer from "./component/router/RouteCustomer";
 import RouteStore from "./component/router/RouteStore";
 import CartContextProvider from "./component/context/cartContext";
 import RouteAdmin from "./component/router/RouteAdmin";
+import RouteShipper from "./component/router/RouteShipper";
 
 function App() {
   let statusUser = 1;
@@ -16,7 +17,8 @@ function App() {
         {/* <RouteCustomer /> */}
 
         {/* <RouteStore /> */}
-        <RouteAdmin />
+        {/* <RouteAdmin /> */}
+        <RouteShipper />
       </BrowserRouter>
     </CartContextProvider>
   );
