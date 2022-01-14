@@ -57,10 +57,6 @@
   padding: 10px;
 }
 
-.modal-dialog {
-  margin-inline-start: 460px;
-}
-
 .featured__item__pic__hover li:hover button {
   background: #7fad39;
   border-color: #7fad39;
@@ -95,4 +91,11 @@
 .btn-invisible {
   background: transparent;
   border: none !important;
+}
+
+.center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }

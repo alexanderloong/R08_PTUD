@@ -27,11 +27,11 @@ const ModalAddProduct = () => {
   };
   return (
     <div className="modal fade" id="addProduct">
-      <div className="modal-dialog">
+      <div className="modal-dialog ">
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title" id="exampleModalLabel">
-              Chi tiết đơn hàng
+              Thêm sản phẩm
             </h5>
             <button
               type="button"
@@ -40,7 +40,7 @@ const ModalAddProduct = () => {
               aria-label="Close"
             ></button>
           </div>
-          <div className="modal-body">
+          <div className="modal-body" style={{ width: "50%" }}>
             <table className="table">
               <thead>
                 <tr>
@@ -58,7 +58,6 @@ const ModalAddProduct = () => {
                       type="text"
                       className="update-product"
                       name="imgProduct"
-                      style={{ width: "200px" }}
                       onChange={handleChange}
                     />
                   </td>
@@ -67,7 +66,6 @@ const ModalAddProduct = () => {
                       type="text"
                       className="update-product"
                       name="nameProduct"
-                      style={{ width: "200px" }}
                       onChange={handleChange}
                     />
                   </td>
@@ -76,7 +74,6 @@ const ModalAddProduct = () => {
                       className="update-product"
                       name="typeProduct"
                       onChange={handleChange}
-                      style={{ width: "200px" }}
                     >
                       <option value="">-</option>
                       {catalog}
