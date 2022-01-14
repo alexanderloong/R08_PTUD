@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 
+import { useNavigate } from "react-router-dom";
+import { useCart } from "../../hooks/hookContext";
 import { PriceFormat } from "./PriceFormat";
 
 const Header = () => {
+  // Router
+  const navigate = useNavigate();
+
+  // Context
+  const [stateCart, dispatchCart] = useCart();
+  const { quantityItem } = stateCart;
+  // Render
   return (
     <header className="header">
       <div className="header__top">
@@ -104,14 +113,16 @@ const Header = () => {
                   </a>
                 </li>
                 <li>
-                  <a href="/shoping-cart">
-                    <i className="fa fa-shopping-bag"></i> <span>3</span>
-                  </a>
+                  <button
+                    className="btn-invisible"
+                    onClick={() => navigate("/shoping-cart")}
+                  >
+                    <i className="fa fa-shopping-bag"></i>
+                    <span>{quantityItem}</span>
+                  </button>
                 </li>
               </ul>
-              <div className="header__cart__price">
-                Giỏ hàng: <PriceFormat price={150000} />
-              </div>
+              <div className="header__cart__price">Giỏ hàng</div>
             </div>
           </div>
         </div>

@@ -91,3 +91,8 @@
 .update-product {
   width: 90px;
 }
+
+.btn-invisible {
+  background: transparent;
+  border: none !important;
+}

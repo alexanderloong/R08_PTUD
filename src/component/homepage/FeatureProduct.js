@@ -1,59 +1,90 @@
 import React from "react";
+import { useCart } from "../../hooks/hookContext";
+import { addToCart } from "../context/action";
 
 import { PriceFormat } from "../Global/PriceFormat";
 
-const FeatureProduct = () => {
-  let product = [
-    {
-      img: "asset/img/featured/feature-1.jpg",
-      name: "Thịt bò",
-      type: "meat",
-      price: 150000,
-    },
-    {
-      img: "asset/img/featured/feature-2.jpg",
-      name: "Chuối",
-      type: "fruits",
-      price: 150000,
-    },
-    {
-      img: "asset/img/featured/feature-3.jpg",
-      name: "Ổi",
-      type: "fruits",
-      price: 150000,
-    },
-    {
-      img: "asset/img/featured/feature-4.jpg",
-      name: "Dưa hấu",
-      type: "fruits",
-      price: 150000,
-    },
-    {
-      img: "asset/img/featured/feature-5.jpg",
-      name: "Nho",
-      type: "fruits",
-      price: 150000,
-    },
-    {
-      img: "asset/img/featured/feature-6.jpg",
-      name: "Hamburger",
-      type: "fastfood",
-      price: 150000,
-    },
-    {
-      img: "asset/img/featured/feature-7.jpg",
-      name: "Xoài",
-      type: "fruits",
-      price: 150000,
-    },
-    {
-      img: "asset/img/featured/feature-8.jpg",
-      name: "Táo",
-      type: "fruits",
-      price: 150000,
-    },
-  ];
+let product = [
+  {
+    code: "pr00001",
+    img: "asset/img/featured/feature-1.jpg",
+    name: "Thịt bò",
+    type: "meat",
+    price: 150000,
+  },
+  {
+    code: "pr00002",
+    img: "asset/img/featured/feature-2.jpg",
+    name: "Chuối",
+    type: "fruits",
+    price: 150000,
+  },
+  {
+    code: "pr00003",
+    img: "asset/img/featured/feature-3.jpg",
+    name: "Ổi",
+    type: "fruits",
+    price: 150000,
+  },
+  {
+    code: "pr00004",
+    img: "asset/img/featured/feature-4.jpg",
+    name: "Dưa hấu",
+    type: "fruits",
+    price: 150000,
+  },
+  {
+    code: "pr00005",
+    img: "asset/img/featured/feature-5.jpg",
+    name: "Nho",
+    type: "fruits",
+    price: 150000,
+  },
+  {
+    code: "pr00006",
+    img: "asset/img/featured/feature-6.jpg",
+    name: "Hamburger",
+    type: "fastfood",
+    price: 150000,
+  },
+  {
+    code: "pr00007",
+    img: "asset/img/featured/feature-7.jpg",
+    name: "Xoài",
+    type: "fruits",
+    price: 150000,
+  },
+  {
+    code: "pr00008",
+    img: "asset/img/featured/feature-8.jpg",
+    name: "Táo",
+    type: "fruits",
+    price: 150000,
+  },
+];
 
+const FeatureProduct = () => {
+  // Context
+  const [stateCart, dispathCart] = useCart();
+  const { itemCart, totalCart, quantityItem } = stateCart;
+  console.log(stateCart);
+
+  // Handle
+  const handleClick = (item) => {
+    let listItem = itemCart;
+
+    item.quantity = 1;
+    listItem.push(item);
+
+    dispathCart(
+      addToCart({
+        itemCart: listItem,
+        totalCart: totalCart + item.price,
+        quantityItem: quantityItem + 1,
+      })
+    );
+  };
+  // Mapping
   let listProduct = product.map((item, index) => (
     <div key={index} className={`col-lg-3 col-md-4 col-sm-6 mix ${item.type}`}>
       <div className="featured__item">
@@ -71,14 +102,9 @@ const FeatureProduct = () => {
               </a>
             </li>
             <li>
-              <a href="/">
-                <i className="fa fa-retweet"></i>
-              </a>
-            </li>
-            <li>
-              <a href="/">
+              <button onClick={() => handleClick(item)}>
                 <i className="fa fa-shopping-cart"></i>
-              </a>
+              </button>
             </li>
           </ul>
         </div>

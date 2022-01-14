@@ -1,4 +1,6 @@
-import { createContext, useState } from "react";
+import { createContext, useReducer } from "react";
+
+import cartReducer, { initialState } from "../reducers/cartReducer";
 
 // Export Constant
 export const cartContext = createContext();
@@ -6,15 +8,15 @@ export const cartContext = createContext();
 // Provider
 const CartContextProvider = ({ children }) => {
   // State
-  const [stateCart, setStateCart] = useState();
+  const [stateCart, dispatchCart] = useReducer(cartReducer, initialState);
 
   // Method
 
   // Context Method
-  const cartContextMethod = { stateCart, setStateCart };
+  //   const cartContextMethod = { [stateCart, dispatchCart] };
 
   return (
-    <cartContext.Provider value={cartContextMethod}>
+    <cartContext.Provider value={[stateCart, dispatchCart]}>
       {children}
     </cartContext.Provider>
   );

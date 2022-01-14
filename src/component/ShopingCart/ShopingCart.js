@@ -1,47 +1,24 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import { PriceFormat } from "../Global/PriceFormat";
 import Breadcrumb from "./Breadcrumb";
 import HeroSection from "../Global/HeroSection";
 import ItemCart from "./ItemCart";
-
 import useScript from "../../hooks/useScript";
-
-let product = [
-  {
-    img: "asset/img/cart/cart-1.jpg",
-    name: "Rau quả 1",
-    type: "combo",
-    quantity: 1,
-    price: 150000,
-  },
-  {
-    img: "asset/img/cart/cart-2.jpg",
-    name: "Rau quả 2",
-    type: "combo",
-    quantity: 2,
-    price: 150000,
-  },
-  {
-    img: "asset/img/cart/cart-3.jpg",
-    name: "Chuối",
-    type: "fruits",
-    quantity: 2,
-    price: 150000,
-  },
-];
-
-let totalPrice = 0;
-product.map((item) => (totalPrice += item.price * item.quantity));
+import { useCart } from "../../hooks/hookContext";
+import { updateTotalCart } from "../context/action";
 
 const ShopingCart = () => {
-  useScript("asset/js/jquery-3.3.1.min.js");
-  useScript("asset/js/bootstrap.min.js");
-  useScript("asset/js/jquery.nice-select.min.js");
-  useScript("asset/js/jquery-ui.min.js");
-  useScript("asset/js/jquery.slicknav.js");
-  useScript("asset/js/mixitup.min.js");
-  useScript("asset/js/owl.carousel.min.js");
-  useScript("asset/js/main.js");
+  // Context
+  const [stateCart, dispatch] = useCart();
+  const { itemCart, totalCart, quantityItem } = stateCart;
+
+  // Variables
+  let ttCart = 0;
+
+  // Handle click
+  const handleClick = (e) => {
+    dispatch(updateTotalCart(ttCart));
+  };
 
   return (
     <Fragment>
@@ -68,16 +45,20 @@ const ShopingCart = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {product.map((item, index) => (
-                      <ItemCart
-                        key={index}
-                        img={item.img}
-                        name={item.name}
-                        price={item.price}
-                        quantity={item.quantity}
-                        priceTotal={item.price * item.quantity}
-                      />
-                    ))}
+                    {itemCart.map((item, index) => {
+                      ttCart += item.price * item.quantity;
+                      return (
+                        <ItemCart
+                          key={index}
+                          code={item.code}
+                          img={item.img}
+                          name={item.name}
+                          price={item.price}
+                          quantity={item.quantity}
+                          priceTotal={item.quantity * item.price}
+                        />
+                      );
+                    })}
                   </tbody>
                 </table>
               </div>
@@ -111,25 +92,25 @@ const ShopingCart = () => {
                   <li>
                     Tổng giỏ hàng{" "}
                     <span>
-                      <PriceFormat price={totalPrice} />
+                      <PriceFormat price={ttCart} />
                     </span>
                   </li>
                   <li>
                     Giảm giá{" "}
                     <span>
-                      <PriceFormat price={100000} />
+                      <PriceFormat price={0} />
                     </span>
                   </li>
                   <li>
                     Tổng cộng{" "}
                     <span>
-                      <PriceFormat price={totalPrice - 100000} />
+                      <PriceFormat price={ttCart} />
                     </span>
                   </li>
                 </ul>
-                <a href="/payment" className="primary-btn">
+                <button onClick={handleClick} className="primary-btn">
                   Tiến Hành Thanh Toán
-                </a>
+                </button>
               </div>
             </div>
           </div>
