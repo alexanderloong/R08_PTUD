@@ -7,7 +7,7 @@ import Home from "../homepage/Home";
 import Signin from "../SignInOut/Signin";
 import Signup from "../SignInOut/Signup";
 import ShopingCart from "../ShopingCart/ShopingCart";
-import MngCus from "../ManageAccount/MngCus";
+import MngCus from "../ManageAccount/MainCus";
 import MainGridProduct from "../ShopGrid/MainGridProduct";
 import MainDetail from "../ShopDetail/MainDetail";
 import { Route, Routes } from "react-router-dom";

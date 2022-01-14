@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import AccountAdmin from "./AccountAdmin";
+import MngCus from "./MngCus";
+import MngStore from "./MngStore";
 
 // Variables
 let activeButton = "list-group-item list-group-item-action active";
@@ -12,11 +15,11 @@ const MainAdmin = () => {
   const renderTab = (param) => {
     switch (param) {
       case 0:
-        return "< />;";
+        return <AccountAdmin />;
       case 1:
-        return "< />;";
+        return <MngStore />;
       case 2:
-        return "< />;";
+        return <MngCus />;
       default:
         return null;
     }
