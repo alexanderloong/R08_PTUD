@@ -3,7 +3,7 @@ import { cartContext } from "../context/cartContext";
 import FormAddress from "../ManageAccount/FormAddress";
 
 import { loginUser } from "../context/action";
-const AccountCus = () => {
+const AcountStore = () => {
   // Context
   const { stateCart, putStore, dispatchCart } = useContext(cartContext);
   const { user } = stateCart;
@@ -109,4 +109,4 @@ const AccountCus = () => {
   );
 };
 
-export default AccountCus;
+export default AcountStore;

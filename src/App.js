@@ -1,7 +1,7 @@
 import "./App.css";
 import React, { useContext } from "react";
 
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 
 import RouteCustomer from "./component/router/RouteCustomer";
 import RouteStore from "./component/router/RouteStore";
@@ -22,15 +22,7 @@ function App() {
   else if (typeUser === 1) renderType = <RouteStore />;
 
   // Render
-  return (
-    <BrowserRouter>
-      {renderType}
-      {/* <RouteCustomer /> */}
-      {/* <RouteStore /> */}
-      {/* <RouteAdmin /> */}
-      {/* <RouteShipper /> */}
-    </BrowserRouter>
-  );
+  return <BrowserRouter>{renderType}</BrowserRouter>;
 }
 
 export default App;

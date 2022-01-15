@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import { PriceFormat } from "../Global/PriceFormat";
 import ModalAddProduct from "./ModalAddProduct";
+import { cartContext } from "../context/cartContext";
 
 let listProduct = [
   {
@@ -13,26 +14,10 @@ let listProduct = [
   },
 ];
 
-let listCatalog = [
-  "Thịt, cá, hải sản",
-  "Rau, củ, trái cây",
-  "Đồ uống các loại",
-  "Sữa uống các loại",
-  "Bánh kẹo các loại",
-  "Gạo, bột, đồ khô",
-  "Đồ mát, đông lạnh",
-  "Chăm sóc cá nhân",
-  "Đồ dùng gia đình",
-  "Chăm sóc cá nhân",
-];
-
-let catalog = listCatalog.map((item, index) => (
-  <option key={index} value={item}>
-    {item}
-  </option>
-));
-
 const MngProduct = () => {
+  // Context
+  const { stateCatalog } = useContext(cartContext);
+
   // State
   const [stateUpdateProduct, setCode] = useState();
   const [stateProductAfter, setProductAfter] = useState();
@@ -42,7 +27,17 @@ const MngProduct = () => {
     setProductAfter({ ...stateProductAfter, [e.target.name]: e.target.value });
   };
 
-  console.log(stateProductAfter);
+  // Mapping
+  let catalog = stateCatalog.map((item, index) => (
+    <option key={index} value={item.id}>
+      {item.category_name}
+    </option>
+  ));
+
+  // Logger
+  console.log(stateCatalog);
+
+  // Handle
   return (
     <form className="detail-tab">
       <h3>Quản lý sản phẩm</h3>
@@ -60,6 +55,7 @@ const MngProduct = () => {
           <label>Loại sản phẩm</label>
           <select className="form-select form-select-lg">
             <option value="5">Tất cả</option>
+            {catalog}
           </select>
         </div>
         <div>

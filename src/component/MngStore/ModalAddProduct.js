@@ -1,33 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
-let listCatalog = [
-  "Thịt, cá, hải sản",
-  "Rau, củ, trái cây",
-  "Đồ uống các loại",
-  "Sữa uống các loại",
-  "Bánh kẹo các loại",
-  "Gạo, bột, đồ khô",
-  "Đồ mát, đông lạnh",
-  "Chăm sóc cá nhân",
-  "Đồ dùng gia đình",
-  "Chăm sóc cá nhân",
-];
-
-let catalog = listCatalog.map((item, index) => (
-  <option key={index} value={item}>
-    {item}
-  </option>
-));
+import { cartContext } from "../context/cartContext";
 
 const ModalAddProduct = () => {
+  // Context
+  const { stateCatalog, postProduct, stateCart } = useContext(cartContext);
+
+  // State
   const [stateProductAdd, setProductAdd] = useState();
 
+  // Handle
   const handleChange = (e) => {
     setProductAdd({ ...stateProductAdd, [e.target.name]: e.target.value });
   };
+
+  const handleClick = async (e) => {
+    stateProductAdd.store_id = stateCart.user.id;
+
+    const response = await postProduct(stateProductAdd);
+
+    console.log(stateProductAdd);
+    console.log(response);
+  };
+
+  // Mapping
+  let catalog = stateCatalog.map((item, index) => (
+    <option key={index} value={item.id}>
+      {item.category_name}
+    </option>
+  ));
+
+  //Logger
+
+  // Render
   return (
     <div className="modal fade" id="addProduct">
-      <div className="modal-dialog ">
+      <div className="modal-dialog " style={{ marginInline: "200px" }}>
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title" id="exampleModalLabel">
@@ -40,7 +48,7 @@ const ModalAddProduct = () => {
               aria-label="Close"
             ></button>
           </div>
-          <div className="modal-body" style={{ width: "50%" }}>
+          <div className="modal-body">
             <table className="table">
               <thead>
                 <tr>
@@ -57,7 +65,7 @@ const ModalAddProduct = () => {
                     <input
                       type="text"
                       className="update-product"
-                      name="imgProduct"
+                      name="list_images"
                       onChange={handleChange}
                     />
                   </td>
@@ -65,14 +73,14 @@ const ModalAddProduct = () => {
                     <input
                       type="text"
                       className="update-product"
-                      name="nameProduct"
+                      name="product_name"
                       onChange={handleChange}
                     />
                   </td>
                   <td>
                     <select
                       className="update-product"
-                      name="typeProduct"
+                      name="product_category"
                       onChange={handleChange}
                     >
                       <option value="">-</option>
@@ -83,7 +91,7 @@ const ModalAddProduct = () => {
                     <input
                       type="text"
                       className="update-product"
-                      name="priceProduct"
+                      name="unit_price"
                       onChange={handleChange}
                     />
                   </td>
@@ -91,7 +99,7 @@ const ModalAddProduct = () => {
                     <input
                       type="text"
                       className="update-product"
-                      name="quantityProduct"
+                      name="quantity"
                       onChange={handleChange}
                     />
                   </td>
@@ -100,7 +108,11 @@ const ModalAddProduct = () => {
             </table>
           </div>
           <div className="modal-footer">
-            <button type="button" className="btn btn-primary">
+            <button
+              onClick={handleClick}
+              type="button"
+              className="btn btn-primary"
+            >
               Thêm sản phẩm
             </button>
           </div>

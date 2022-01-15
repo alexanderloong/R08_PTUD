@@ -3,7 +3,7 @@ import axios from "axios";
 import cartReducer, { initialState } from "../reducers/cartReducer";
 
 // Export Constant
-export const cartContext = createContext();
+export const cartContext = createContext("");
 
 // Provider
 const CartContextProvider = ({ children }) => {
@@ -116,9 +116,23 @@ const CartContextProvider = ({ children }) => {
     }
   };
 
+  const postProduct = async (data) => {
+    try {
+      const response = await axios.post(
+        `https://localhost:44359/api/Product/create`,
+        data
+      );
+
+      return response;
+    } catch (error) {
+      if (error.response.data) return error.response.data;
+      else return { success: false, message: error.message };
+    }
+  };
+
   // Use Effect
-  useEffect(async () => await getAllLevel(), []);
-  useEffect(async () => await getCatalog(), []);
+  useEffect(() => getAllLevel(), []);
+  useEffect(() => getCatalog(), []);
 
   // Context data
   const contextData = {
@@ -133,6 +147,7 @@ const CartContextProvider = ({ children }) => {
     stateType,
     putStore,
     setStateType,
+    postProduct,
   };
 
   return (
