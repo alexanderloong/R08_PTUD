@@ -10,6 +10,7 @@ let product = [
     img: "asset/img/featured/feature-1.jpg",
     name: "Thịt bò",
     type: "meat",
+    store: "a1",
     price: 150000,
   },
   {
@@ -17,6 +18,7 @@ let product = [
     img: "asset/img/featured/feature-2.jpg",
     name: "Chuối",
     type: "fruits",
+    store: "a1",
     price: 150000,
   },
   {
@@ -24,12 +26,14 @@ let product = [
     img: "asset/img/featured/feature-3.jpg",
     name: "Ổi",
     type: "fruits",
+    store: "a2",
     price: 150000,
   },
   {
     code: "pr00004",
     img: "asset/img/featured/feature-4.jpg",
     name: "Dưa hấu",
+    store: "a2",
     type: "fruits",
     price: 150000,
   },
@@ -65,7 +69,7 @@ let product = [
 
 const FeatureProduct = () => {
   // Context
-  const { stateCart, dispathCart } = useContext(cartContext);
+  const { stateCart, dispatchCart } = useContext(cartContext);
   const { itemCart, totalCart, quantityItem } = stateCart;
 
   // Handle
@@ -75,7 +79,7 @@ const FeatureProduct = () => {
     item.quantity = 1;
     listItem.push(item);
 
-    dispathCart(
+    dispatchCart(
       addToCart({
         itemCart: listItem,
         totalCart: totalCart + item.price,

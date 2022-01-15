@@ -16,8 +16,41 @@ const CartContextProvider = ({ children }) => {
   const [stateType, setStateType] = useState([0]);
 
   // Method
+  const splitOrder = (data) => {
+    let cart = data;
+    let listOrder = [];
 
-  // Context Method
+    while (cart.length !== 0) {
+      // Variables
+      const store_id = data[0].store;
+      let order = {
+        total_amount: 0,
+        payment_method_id: "025980301",
+        customer_id: "61e1313994610a9f8db2d3b2",
+        store_id: store_id,
+        products: [],
+        quantities: [],
+      };
+
+      // Handle
+      for (let index = 0; index < cart.length; index++) {
+        if (cart[index].store === store_id) {
+          order.products.push(cart[index].code);
+          order.quantities.push(cart[index].quantity);
+          order.total_amount += cart[index].price * cart[index].quantity;
+          // Delete item
+          cart.splice(index, 1);
+
+          --index;
+        }
+      }
+
+      // Push to listOrder
+      listOrder.push(order);
+    }
+
+    return listOrder;
+  };
 
   // Call API
   const getAllLevel = async () => {
@@ -130,12 +163,26 @@ const CartContextProvider = ({ children }) => {
     }
   };
 
+  const postOrder = async (data) => {
+    try {
+      const response = await axios.post(
+        `https://localhost:44359/api/Order/create`,
+        data
+      );
+
+      return response;
+    } catch (error) {
+      if (error.response.data) return error.response.data;
+      else return { success: false, message: error.message };
+    }
+  };
+
   // Use Effect
   useEffect(() => getAllLevel(), []);
   useEffect(() => getCatalog(), []);
 
-  // Context data
-  const contextData = {
+  // Context method
+  const contextMethod = {
     stateCart,
     dispatchCart,
     stateLevel,
@@ -148,10 +195,14 @@ const CartContextProvider = ({ children }) => {
     putStore,
     setStateType,
     postProduct,
+    postOrder,
+    splitOrder,
   };
 
   return (
-    <cartContext.Provider value={contextData}>{children}</cartContext.Provider>
+    <cartContext.Provider value={contextMethod}>
+      {children}
+    </cartContext.Provider>
   );
 };
 

@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { cartContext } from "../context/cartContext";
 
-import { DateFormat, PhoneNumberFormat } from "../Global/PriceFormat";
 import FormAddress from "../ManageAccount/FormAddress";
 
 import { loginUser } from "../context/action";
@@ -42,16 +41,16 @@ const Signup = () => {
     console.log(stateInfor);
 
     let response = await postRegisterUser(stateInfor);
-    if (response.data.code === 0) {
-      await dispatchCart(loginUser({ data: response.data.payload, type: 0 }));
-      navigator("/");
+    if (response.code === 0) {
+      dispatchCart(loginUser({ data: response.payload, type: 0 }));
+      navigate("/");
     }
     console.log(response);
   };
 
   // Logger
-  useEffect(() => console.log(stateLevel), []);
-  useEffect(() => console.log(stateInfor), []);
+  // useEffect(() => console.log(stateLevel), []);
+  // useEffect(() => console.log(stateInfor), []);
 
   // Render
   return (

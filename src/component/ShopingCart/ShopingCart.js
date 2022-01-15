@@ -1,26 +1,43 @@
-import React, { Fragment, useContext, useEffect } from "react";
+import React, { Fragment, useContext } from "react";
 import { PriceFormat } from "../Global/PriceFormat";
 import Breadcrumb from "./Breadcrumb";
 import HeroSection from "../Global/HeroSection";
 import ItemCart from "./ItemCart";
-import useScript from "../../hooks/useScript";
 
 import { updateTotalCart } from "../context/action";
 import { cartContext } from "../context/cartContext";
+import { useNavigate } from "react-router-dom";
 
 const ShopingCart = () => {
   // Context
-  const { stateCart, dispatch } = useContext(cartContext);
+  const { stateCart, dispatchCart, splitOrder, postOrder } =
+    useContext(cartContext);
   const { itemCart } = stateCart;
+
+  // Navigate
+  const navigate = useNavigate();
 
   // Variables
   let ttCart = 0;
 
   // Handle click
-  const handleClick = (e) => {
-    dispatch(updateTotalCart(ttCart));
+  const handleClick = async (e) => {
+    // Split order
+    let listOrder = splitOrder(itemCart);
+
+    // Update TotalAmount Order
+    dispatchCart(updateTotalCart(ttCart));
+
+    console.log(listOrder);
+    // Call API
+    let response;
+    listOrder.forEach(async (item) => {
+      response = await postOrder(item);
+      console.log(response);
+    });
   };
 
+  // Render
   return (
     <Fragment>
       <HeroSection />
@@ -39,6 +56,7 @@ const ShopingCart = () => {
                   <thead>
                     <tr>
                       <th className="shoping__product">Tên sản phẩm</th>
+                      <th>Cửa hàng</th>
                       <th>Giá cả</th>
                       <th>Số lượng</th>
                       <th>Tổng cộng</th>
@@ -48,17 +66,7 @@ const ShopingCart = () => {
                   <tbody>
                     {itemCart.map((item, index) => {
                       ttCart += item.price * item.quantity;
-                      return (
-                        <ItemCart
-                          key={index}
-                          code={item.code}
-                          img={item.img}
-                          name={item.name}
-                          price={item.price}
-                          quantity={item.quantity}
-                          priceTotal={item.quantity * item.price}
-                        />
-                      );
+                      return <ItemCart key={index} item={item} />;
                     })}
                   </tbody>
                 </table>
@@ -68,9 +76,12 @@ const ShopingCart = () => {
           <div className="row">
             <div className="col-lg-12">
               <div className="shoping__cart__btns">
-                <a href="/" className="primary-btn cart-btn">
+                <div
+                  onClick={() => navigate("/")}
+                  className="primary-btn cart-btn pointer"
+                >
                   Tiếp tục mua hàng
-                </a>
+                </div>
               </div>
             </div>
             <div className="col-lg-6">

@@ -2,7 +2,6 @@ import {
   ADD_TO_CART,
   CHANGE_QUANTITY_CART,
   DELETE_ITEM_CART,
-  GET_CATALOG,
   LOGIN_USER,
   UPDATE_TOTALCART_CART,
 } from "../context/constants";
@@ -16,9 +15,9 @@ const initialState = {
 };
 
 function cartReducer(state, action) {
-  const { itemCart, totalCart, quantity } = state;
-
+  const { itemCart, quantityItem } = state;
   const { code, quantityIt } = action.payload;
+
   switch (action.type) {
     case ADD_TO_CART:
       return {
@@ -42,11 +41,12 @@ function cartReducer(state, action) {
       };
     case DELETE_ITEM_CART:
       let updItemCart2 = itemCart;
-
       updItemCart2.splice(action.payload, 1);
+
       return {
         ...state,
         itemCart: updItemCart2,
+        quantityItem: quantityItem - 1,
       };
     case LOGIN_USER:
       return {

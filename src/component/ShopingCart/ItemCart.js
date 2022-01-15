@@ -6,25 +6,26 @@ import { cartContext } from "../context/cartContext";
 import { deleteItemCart } from "../context/action";
 const ItemCart = (props) => {
   // Context
-  const { stateCart, dispatch } = useContext(cartContext);
-  const { itemCart, totalCart, quantityItem } = stateCart;
-
-  console.log(totalCart);
+  const { stateCart, dispatchCart } = useContext(cartContext);
+  const { itemCart } = stateCart;
 
   // Handle Click
   const handleClick = () => {
-    dispatch(
-      deleteItemCart(itemCart.findIndex((obj) => obj.code === props.code))
+    dispatchCart(
+      deleteItemCart(itemCart.findIndex((obj) => obj.code === props.item.code))
     );
   };
+
+  // Render
   return (
     <tr>
       <td className="shoping__cart__item">
-        <img src={props.img} alt="" style={{ width: "100px" }} />
-        <h5>{props.name}</h5>
+        <img src={props.item.img} alt="" style={{ width: "100px" }} />
+        <h5>{props.item.name}</h5>
       </td>
+      <td className="shoping__cart__price">{props.item.store}</td>
       <td className="shoping__cart__price">
-        <PriceFormat price={props.price} />
+        <PriceFormat price={props.item.price} />
       </td>
       <td className="shoping__cart__quantity">
         <div className="quantity">
@@ -32,22 +33,20 @@ const ItemCart = (props) => {
             <input
               type="text"
               onChange={(e) => {
-                dispatch(
+                dispatchCart(
                   changeQuantity({
-                    code: props.code,
+                    code: props.item.code,
                     quantityIt: e.target.value,
                   })
                 );
-
-                console.log(e.target.value);
               }}
-              defaultValue={props.quantity}
+              defaultValue={props.item.quantity}
             />
           </div>
         </div>
       </td>
       <td className="shoping__cart__total">
-        <PriceFormat price={props.priceTotal} />
+        <PriceFormat price={props.item.quantity * props.item.price} />
       </td>
       <td>
         <button
