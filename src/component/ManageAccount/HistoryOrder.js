@@ -22,6 +22,12 @@ let listOrder = [
     status: 3,
   },
   {
+    code: "a100004",
+    date: "25/12/2021",
+    totalBill: 800000,
+    status: 4,
+  },
+  {
     code: "a100003",
     date: "25/01/2022",
     totalBill: 50000,
@@ -32,22 +38,20 @@ let listOrder = [
 const HistoryOrder = () => {
   // Render status
   const renderStatus = (param) => {
-    const renderStatus = (param) => {
-      switch (param) {
-        case 1:
-          return <td style={{ color: "#7fad39" }}>Chờ xác nhận</td>;
-        case 2:
-          return <td style={{ color: "#7fad39" }}>Chờ giao hàng</td>;
-        case 3:
-          return <td style={{ color: "blue" }}>Đang giao</td>;
-        case 4:
-          return <td style={{ color: "red" }}>Hoàn thành</td>;
-        case 0:
-          return <td style={{ color: "gray" }}>Đã huỷ</td>;
-        default:
-          return null;
-      }
-    };
+    switch (param) {
+      case 1:
+        return <td style={{ color: "#7fad39" }}>Chờ xác nhận</td>;
+      case 2:
+        return <td style={{ color: "#7fad39" }}>Chờ giao hàng</td>;
+      case 3:
+        return <td style={{ color: "blue" }}>Đang giao</td>;
+      case 4:
+        return <td style={{ color: "red" }}>Hoàn thành</td>;
+      case 0:
+        return <td style={{ color: "gray" }}>Đã huỷ</td>;
+      default:
+        return null;
+    }
   };
 
   return (
@@ -93,6 +97,7 @@ const HistoryOrder = () => {
                   <PriceFormat price={item.totalBill} />
                 </td>
                 {renderStatus(item.status)}
+
                 <td>
                   {/* Button detail */}
                   <button

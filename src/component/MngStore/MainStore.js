@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import AccountStore from "./AccountStore";
 import MngOrder from "./MngOrder";
-import MngProduct from "./MngProduct";
+import MngProduct from "./MngProduct/MngProduct";
 
 // Variables
 let activeButton = "list-group-item list-group-item-action active";

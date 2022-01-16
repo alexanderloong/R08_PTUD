@@ -66,7 +66,6 @@ let product = [
     price: 150000,
   },
 ];
-
 const FeatureProduct = () => {
   // Context
   const { stateCart, dispatchCart } = useContext(cartContext);

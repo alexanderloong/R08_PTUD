@@ -64,9 +64,12 @@ const Header = () => {
                       <i className="fa fa-user"></i> Đăng Nhập
                     </a>
                   ) : (
-                    <a href="/" onClick={() => navigator("/profile")}>
+                    <div
+                      className="pointer"
+                      onClick={() => navigator("/profile")}
+                    >
                       <i className="fa fa-user"></i> {stateCart.user.name}
-                    </a>
+                    </div>
                   )}
                 </div>
               </div>

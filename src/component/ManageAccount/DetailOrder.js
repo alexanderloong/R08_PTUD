@@ -23,7 +23,7 @@ let detailOrder = [
 ];
 
 let listItem = detailOrder.map((item) => (
-  <tr>
+  <tr key={item.code}>
     <th>{item.code}</th>
     <td>{item.name}</td>
     <td>{item.quantity}</td>
@@ -38,7 +38,7 @@ let listItem = detailOrder.map((item) => (
 const DetailOrder = (props) => {
   return (
     <div className="modal fade" id={props.code}>
-      <div className="modal-dialog">
+      <div className="modal-dialog" style={{ marginInline: "200px" }}>
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title" id="exampleModalLabel">
@@ -52,7 +52,7 @@ const DetailOrder = (props) => {
             ></button>
           </div>
           <div className="modal-body">
-            <table class="table">
+            <table className="table">
               <thead>
                 <tr>
                   <th scope="col">Mã sản phẩm</th>

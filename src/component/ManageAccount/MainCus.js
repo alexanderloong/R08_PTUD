@@ -62,6 +62,13 @@ const MngCus = () => {
           >
             <i className="fa fa-cog" /> Cài đặt tài khoản
           </button>
+          <button
+            type="button"
+            onClick={() => (window.location.href = "/")}
+            className={nonActiveButton}
+          >
+            <i className="fa fa-cog" /> Đăng xuất
+          </button>
         </section>
 
         <section className="col-lg-9">{renderTab(stateTab)}</section>

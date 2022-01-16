@@ -177,6 +177,19 @@ const CartContextProvider = ({ children }) => {
     }
   };
 
+  const getProductOfStore = async (id) => {
+    try {
+      const response = await axios.get(
+        `https://localhost:44359/api/Product/get_product_store?store_id=${id}`
+      );
+
+      return response;
+    } catch (error) {
+      if (error.response.data) return error.response.data;
+      else return { success: false, message: error.message };
+    }
+  };
+
   // Use Effect
   useEffect(() => getAllLevel(), []);
   useEffect(() => getCatalog(), []);
@@ -197,6 +210,7 @@ const CartContextProvider = ({ children }) => {
     postProduct,
     postOrder,
     splitOrder,
+    getProductOfStore,
   };
 
   return (
