@@ -1,40 +1,9 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { PriceFormat } from "../Global/PriceFormat";
 import DetailOrder from "./ModalDetailOrder";
 import ModalOrderCancel from "./ModalOrderCancel";
 
-let listOrder = [
-  {
-    code: "a100000",
-    date: "25/10/2021",
-    totalBill: 100000,
-    status: 1,
-  },
-  {
-    code: "a100001",
-    date: "25/11/2021",
-    totalBill: 500000,
-    status: 2,
-  },
-  {
-    code: "a100002",
-    date: "25/12/2021",
-    totalBill: 800000,
-    status: 3,
-  },
-  {
-    code: "a100004",
-    date: "25/12/2021",
-    totalBill: 800000,
-    status: 4,
-  },
-  {
-    code: "a100003",
-    date: "25/01/2022",
-    totalBill: 50000,
-    status: 0,
-  },
-];
+import { cartContext } from "../context/cartContext";
 
 const MngOrder = () => {
   // Render status
@@ -55,6 +24,22 @@ const MngOrder = () => {
     }
   };
 
+  // Context
+  const { getOrderStore, stateCart } = useContext(cartContext);
+  const { user } = stateCart;
+
+  // State
+  const [stateOrder, setStateOrder] = useState([]);
+
+  // Call API
+
+  useEffect(async () => {
+    const response = await getOrderStore(user.id);
+
+    setStateOrder(response.data.payload);
+  }, []);
+
+  // Render
   return (
     <div className="detail-tab">
       <h3>Quản lý đơn hàng</h3>
@@ -89,7 +74,7 @@ const MngOrder = () => {
             </tr>
           </thead>
           <tbody>
-            {listOrder.map((item) => (
+            {stateOrder.map((item) => (
               <tr key={item.code}>
                 <th>{item.code}</th>
                 <td>{item.date}</td>
@@ -98,7 +83,6 @@ const MngOrder = () => {
                 </td>
                 {renderStatus(item.status)}
                 <td>
-                  {/* Button detail */}
                   <button
                     type="button"
                     className={
@@ -109,7 +93,7 @@ const MngOrder = () => {
                   >
                     {item.status === 1 ? "Chờ xác nhận" : "Chi tiết"}
                   </button>
-                  {/* Button cancel */}
+
                   <button
                     type="button"
                     className="btn mx-2"

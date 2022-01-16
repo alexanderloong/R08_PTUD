@@ -1,109 +1,11 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useContext, useState } from "react";
 
 import HeroSection from "../Global/HeroSection";
 import BreadcrumbG from "./BreadcrumbG";
 
 import useScript from "../../hooks/useScript";
-import { PriceFormat } from "../Global/PriceFormat";
-
-let listCatalog = [
-  "Thịt, cá, hải sản",
-  "Rau, củ, trái cây",
-  "Đồ uống các loại",
-  "Sữa uống các loại",
-  "Bánh kẹo các loại",
-  "Gạo, bột, đồ khô",
-  "Đồ mát, đông lạnh",
-  "Chăm sóc cá nhân",
-  "Đồ dùng gia đình",
-  "Chăm sóc cá nhân",
-];
-
-let product = [
-  {
-    img: "asset/img/featured/feature-1.jpg",
-    name: "Thịt bò",
-    type: "meat",
-    price: 150000,
-  },
-  {
-    img: "asset/img/featured/feature-2.jpg",
-    name: "Chuối",
-    type: "fruits",
-    price: 150000,
-  },
-  {
-    img: "asset/img/featured/feature-3.jpg",
-    name: "Ổi",
-    type: "fruits",
-    price: 150000,
-  },
-  {
-    img: "asset/img/featured/feature-4.jpg",
-    name: "Dưa hấu",
-    type: "fruits",
-    price: 150000,
-  },
-  {
-    img: "asset/img/featured/feature-5.jpg",
-    name: "Nho",
-    type: "fruits",
-    price: 150000,
-  },
-  {
-    img: "asset/img/featured/feature-6.jpg",
-    name: "Hamburger",
-    type: "fastfood",
-    price: 150000,
-  },
-  {
-    img: "asset/img/featured/feature-7.jpg",
-    name: "Xoài",
-    type: "fruits",
-    price: 150000,
-  },
-  {
-    img: "asset/img/featured/feature-8.jpg",
-    name: "Táo",
-    type: "fruits",
-    price: 150000,
-  },
-];
-
-let listProduct = product.map((item, index) => (
-  <div key={index} className={`col-lg-3 col-md-4 col-sm-6 mix ${item.type}`}>
-    <div className="featured__item">
-      <div
-        className="featured__item__pic set-bg"
-        data-setbg={item.img}
-        style={{
-          backgroundImage: `url("${item.img}")`,
-        }}
-      >
-        <ul className="featured__item__pic__hover">
-          <li>
-            <button>
-              <i className="fa fa-heart"></i>
-            </button>
-          </li>
-          <li>
-            <button onClick={() => console.log(123)}>
-              <i className="fa fa-shopping-cart" />
-            </button>
-          </li>
-        </ul>
-      </div>
-      <div className="featured__item__text">
-        <h6>
-          <a href="/">{item.name}</a>
-        </h6>
-        <h5>
-          <PriceFormat price={item.price} />
-        </h5>
-      </div>
-    </div>
-  </div>
-));
+import { cartContext } from "../context/cartContext";
+import ItemProduct from "./ItemProduct";
 
 const MainGridProduct = () => {
   useScript("asset/js/jquery-3.3.1.min.js");
@@ -115,11 +17,31 @@ const MainGridProduct = () => {
   useScript("asset/js/owl.carousel.min.js");
   useScript("asset/js/main.js");
 
+  // Context
+  const { stateCatalog, getSearchProduct } = useContext(cartContext);
+
   // State
-  const [catalog, setStatus] = useState(0);
+  const [stateSearch, setStateSearch] = useState("");
+  const [stateListProduct, setStateListProduct] = useState([]);
+
+  // Handle function
+  const handleChange = (e) => {
+    setStateSearch(e.target.value);
+  };
+
+  const handleClick = async () => {
+    console.log(stateSearch);
+
+    let response = await getSearchProduct(stateSearch);
+    setStateListProduct(response.payload);
+
+    console.log(response);
+  };
+
+  // Render
   return (
     <Fragment>
-      <HeroSection />
+      <HeroSection handleChange={handleChange} handleClick={handleClick} />
       <BreadcrumbG />
 
       {/* <!-- Product Section Begin --> */}
@@ -134,9 +56,9 @@ const MainGridProduct = () => {
                     <li>
                       <a href="/">Toàn bộ</a>
                     </li>
-                    {listCatalog.map((item, index) => (
+                    {stateCatalog.map((item, index) => (
                       <li key={index}>
-                        <a href="/">{item}</a>
+                        <a href="/">{item.category_name}</a>
                       </li>
                     ))}
                   </ul>
@@ -146,7 +68,11 @@ const MainGridProduct = () => {
 
             <div className="col-lg-9 col-md-7">
               <h6>Có 18 sản phẩm phù hợp</h6>
-              <div className="row">{listProduct}</div>
+              <div className="row">
+                {stateListProduct.map((item, index) => (
+                  <ItemProduct item={item} key={index} />
+                ))}
+              </div>
               <div className="product__pagination">
                 <a href="/">1</a>
                 <a href="/">2</a>

@@ -1,9 +1,14 @@
 import React, { useContext } from "react";
 import { cartContext } from "../context/cartContext";
 
+import { useNavigate } from "react-router-dom";
+
 const HeroHeader = () => {
   // Context
   const { stateCatalog } = useContext(cartContext);
+
+  // Router
+  const navigate = useNavigate();
 
   // Render
   return (
@@ -28,13 +33,17 @@ const HeroHeader = () => {
           <div className="col-lg-9">
             <div className="hero__search">
               <div className="hero__search__form">
-                <form action="#">
+                <form onSubmit={(e) => e.preventDefault()} action="#">
                   <div className="hero__search__categories">
                     Toàn ngành hàng
                     <span className="arrow_carrot-down"></span>
                   </div>
                   <input type="text" placeholder="Bạn đang cần gì?" />
-                  <button type="submit" className="site-btn">
+                  <button
+                    type="button"
+                    className="site-btn"
+                    onClick={() => navigate("/search")}
+                  >
                     Tìm kiếm
                   </button>
                 </form>

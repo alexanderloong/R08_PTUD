@@ -190,6 +190,44 @@ const CartContextProvider = ({ children }) => {
     }
   };
 
+  const getOrderStore = async (id) => {
+    try {
+      const response = await axios.get(
+        `https://localhost:44359/api/Order/get_all_order_store?store_id=${id}`
+      );
+
+      return response;
+    } catch (error) {
+      if (error.response.data) return error.response.data;
+      else return { success: false, message: error.message };
+    }
+  };
+
+  const getOrderCustomer = async (id) => {
+    try {
+      const response = await axios.get(
+        `https://localhost:44359/api/Order/get_order_by_customer?customer_id=${id}`
+      );
+
+      return response;
+    } catch (error) {
+      if (error.response.data) return error.response.data;
+      else return { success: false, message: error.message };
+    }
+  };
+
+  const getSearchProduct = async (param) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:8080/api/product/search?name=${param}`
+      );
+
+      return response;
+    } catch (error) {
+      if (error.response.data) return error.response.data;
+      else return { success: false, message: error.message };
+    }
+  };
   // Use Effect
   useEffect(() => getAllLevel(), []);
   useEffect(() => getCatalog(), []);
@@ -211,6 +249,9 @@ const CartContextProvider = ({ children }) => {
     postOrder,
     splitOrder,
     getProductOfStore,
+    getOrderStore,
+    getSearchProduct,
+    getOrderCustomer,
   };
 
   return (

@@ -1,18 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
+import { cartContext } from "../context/cartContext";
 
-const HeroSection = () => {
-  let listCatalog = [
-    "Thịt, cá, hải sản",
-    "Rau, củ, trái cây",
-    "Đồ uống các loại",
-    "Sữa uống các loại",
-    "Bánh kẹo các loại",
-    "Gạo, bột, đồ khô",
-    "Đồ mát, đông lạnh",
-    "Chăm sóc cá nhân",
-    "Đồ dùng gia đình",
-    "Chăm sóc cá nhân",
-  ];
+const HeroSection = (props) => {
+  // Context
+  const { stateCatalog } = useContext(cartContext);
+
+  // Render
   return (
     /* <!-- Hero Section Begin --> */
     <section className="hero hero-normal">
@@ -25,9 +18,9 @@ const HeroSection = () => {
                 <span>Các ngành hàng</span>
               </div>
               <ul>
-                {listCatalog.map((item, index) => (
+                {stateCatalog.map((item, index) => (
                   <li key={index}>
-                    <a href="/">{item}</a>
+                    <a href="/">{item.category_name}</a>
                   </li>
                 ))}
               </ul>
@@ -41,8 +34,16 @@ const HeroSection = () => {
                     Toàn ngành hàng
                     <span className="arrow_carrot-down"></span>
                   </div>
-                  <input type="text" placeholder="Bạn đang cần gì?" />
-                  <button type="submit" className="site-btn">
+                  <input
+                    type="text"
+                    placeholder="Bạn đang cần gì?"
+                    onChange={(e) => props.handleChange(e)}
+                  />
+                  <button
+                    type="button"
+                    className="site-btn"
+                    onClick={props.handleClick}
+                  >
                     Tìm kiếm
                   </button>
                 </form>
