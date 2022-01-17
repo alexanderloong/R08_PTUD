@@ -86,6 +86,7 @@ const FeatureProduct = () => {
       })
     );
   };
+
   // Mapping
   let listProduct = product.map((item, index) => (
     <div key={index} className={`col-lg-3 col-md-4 col-sm-6 mix ${item.type}`}>

@@ -31,9 +31,10 @@ const ShopingCart = () => {
     console.log(listOrder);
     // Call API
     let response;
+
     listOrder.forEach(async (item) => {
       response = await postOrder(item);
-      console.log(response);
+      console.log(response.data.payload.order_id);
     });
   };
 
@@ -65,7 +66,7 @@ const ShopingCart = () => {
                   </thead>
                   <tbody>
                     {itemCart.map((item, index) => {
-                      ttCart += item.price * item.quantity;
+                      ttCart += item.unit_price * item.quantity;
                       return <ItemCart key={index} item={item} />;
                     })}
                   </tbody>

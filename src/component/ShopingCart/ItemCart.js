@@ -12,7 +12,7 @@ const ItemCart = (props) => {
   // Handle Click
   const handleClick = () => {
     dispatchCart(
-      deleteItemCart(itemCart.findIndex((obj) => obj.code === props.item.code))
+      deleteItemCart(itemCart.findIndex((obj) => obj.id === props.item.id))
     );
   };
 
@@ -21,11 +21,11 @@ const ItemCart = (props) => {
     <tr>
       <td className="shoping__cart__item">
         <img src={props.item.img} alt="" style={{ width: "100px" }} />
-        <h5>{props.item.name}</h5>
+        <h5>{props.item.product_name}</h5>
       </td>
-      <td className="shoping__cart__price">{props.item.store}</td>
+      <td className="shoping__cart__price">{props.item.store_id}</td>
       <td className="shoping__cart__price">
-        <PriceFormat price={props.item.price} />
+        <PriceFormat price={props.item.unit_price} />
       </td>
       <td className="shoping__cart__quantity">
         <div className="quantity">
@@ -35,7 +35,7 @@ const ItemCart = (props) => {
               onChange={(e) => {
                 dispatchCart(
                   changeQuantity({
-                    code: props.item.code,
+                    code: props.item.id,
                     quantityIt: e.target.value,
                   })
                 );
@@ -46,7 +46,7 @@ const ItemCart = (props) => {
         </div>
       </td>
       <td className="shoping__cart__total">
-        <PriceFormat price={props.item.quantity * props.item.price} />
+        <PriceFormat price={props.item.quantity * props.item.unit_price} />
       </td>
       <td>
         <button

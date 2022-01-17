@@ -103,3 +103,8 @@
 .pointer {
   cursor: pointer;
 }
+
+.form-check-input:checked {
+  background-color: #7fad39;
+  border-color: #7fad39;
+}

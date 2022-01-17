@@ -25,7 +25,8 @@ const MngOrder = () => {
   };
 
   // Context
-  const { getOrderStore, stateCart } = useContext(cartContext);
+  const { getOrderStore, stateCart, putComfirmOrderStore } =
+    useContext(cartContext);
   const { user } = stateCart;
 
   // State
@@ -38,6 +39,23 @@ const MngOrder = () => {
 
     setStateOrder(response.data.payload);
   }, []);
+
+  console.log(stateOrder);
+
+  // Handle function
+  const handleClick = async (id) => {
+    let data = {
+      order_id: id,
+      store_id: user.id,
+    };
+    let response = await putComfirmOrderStore({
+      order_id: id,
+      store_id: user.id,
+    });
+
+    console.log(data);
+    console.log(response);
+  };
 
   // Render
   return (
@@ -53,7 +71,7 @@ const MngOrder = () => {
           <label>Trạng thái</label>
           <select className="form-select form-select-lg">
             <option value="5">Tất cả</option>
-            <option value="0">Đã huỷ</option>
+            <option value="0">Chờ thanh toán</option>
             <option value="1">Chờ xác nhận</option>
             <option value="2">Chờ giao hàng</option>
             <option value="3">Đang giao</option>
@@ -75,11 +93,11 @@ const MngOrder = () => {
           </thead>
           <tbody>
             {stateOrder.map((item) => (
-              <tr key={item.code}>
-                <th>{item.code}</th>
-                <td>{item.date}</td>
+              <tr key={item.order_id}>
+                <th>{item.order_id}</th>
+                <td>{item.created_at}</td>
                 <td>
-                  <PriceFormat price={item.totalBill} />
+                  <PriceFormat price={item.total_amount} />
                 </td>
                 {renderStatus(item.status)}
                 <td>
@@ -88,8 +106,11 @@ const MngOrder = () => {
                     className={
                       item.status === 1 ? "btn btn-warning" : "btn btn-primary"
                     }
-                    data-bs-toggle="modal"
-                    data-bs-target={`#${item.code}`}
+                    onClick={(e) => {
+                      item.status === 1
+                        ? handleClick(item.order_id)
+                        : e.preventDefault();
+                    }}
                   >
                     {item.status === 1 ? "Chờ xác nhận" : "Chi tiết"}
                   </button>
@@ -98,13 +119,13 @@ const MngOrder = () => {
                     type="button"
                     className="btn mx-2"
                     data-bs-toggle="modal"
-                    data-bs-target={`#${item.code}_`}
+                    data-bs-target={`#${item.order_id}_`}
                     disabled={item.status === 1 ? false : true}
                   >
                     <i className="fa fa-times" />
                   </button>
                   <DetailOrder code={item.code} status={item.status} />
-                  <ModalOrderCancel code={`${item.code}_`} />
+                  <ModalOrderCancel code={`${item.order_id}_`} />
                 </td>
               </tr>
             ))}

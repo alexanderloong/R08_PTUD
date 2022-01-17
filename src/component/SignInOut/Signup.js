@@ -8,7 +8,7 @@ import { loginUser } from "../context/action";
 
 const Signup = () => {
   // Context
-  const { stateLevel, postRegisterUser, dispatchCart } =
+  const { stateLevel, postRegisterUser, dispatchCart, postRegisterShipper } =
     useContext(cartContext);
 
   //
@@ -16,6 +16,7 @@ const Signup = () => {
 
   // State
   const [stateInfor, setStateInfor] = useState();
+  const [stateTypeUser, setTypeUser] = useState(1);
 
   // Handle
   const handleFormAddress = (e) => {
@@ -40,9 +41,16 @@ const Signup = () => {
   const handleClick = async (e) => {
     console.log(stateInfor);
 
-    let response = await postRegisterUser(stateInfor);
+    let response;
+
+    if (stateTypeUser === 1) response = await postRegisterUser(stateInfor);
+    else if (stateTypeUser === 2)
+      response = await postRegisterShipper(stateInfor);
+
     if (response.code === 0) {
-      dispatchCart(loginUser({ data: response.payload, type: 0 }));
+      dispatchCart(
+        loginUser({ data: response.payload, type: stateTypeUser === 1 ? 0 : 2 })
+      );
       navigate("/");
     }
     console.log(response);
@@ -87,6 +95,41 @@ const Signup = () => {
                   className="signin-form row"
                 >
                   <div className="col" style={{ paddingTop: "12.9px" }}>
+                    <div className="form-group d-flex ">
+                      <div className="form-check mx-3 ">
+                        <input
+                          className="form-check-input"
+                          value="cus"
+                          type="radio"
+                          name="radioCheck"
+                          id="flexRadioDefault1"
+                          readOnly
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor="flexRadioDefault1"
+                          onClick={(e) => setTypeUser(1)}
+                        >
+                          Khách hàng
+                        </label>
+                      </div>
+                      <div className="form-check ">
+                        <input
+                          value="ship"
+                          className="form-check-input"
+                          type="radio"
+                          name="radioCheck"
+                          id="flexRadioDefault2"
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor="flexRadioDefault2"
+                          onClick={(e) => setTypeUser(2)}
+                        >
+                          Shipper
+                        </label>
+                      </div>
+                    </div>
                     <div className="form-group mt-4">
                       <input
                         type="text"

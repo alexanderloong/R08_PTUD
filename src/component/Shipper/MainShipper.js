@@ -70,7 +70,11 @@ const MainShipper = () => {
           >
             <i className="fa fa-bar-chart" /> Thống kê
           </button>
-          <button type="button" className={nonActiveButton}>
+          <button
+            onClick={() => (window.location.href = "/")}
+            type="button"
+            className={nonActiveButton}
+          >
             <i className="fa fa-sign-out" /> Đăng xuất
           </button>
         </section>

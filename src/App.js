@@ -20,6 +20,7 @@ function App() {
 
   if (typeUser === 0) renderType = <RouteCustomer />;
   else if (typeUser === 1) renderType = <RouteStore />;
+  else if (typeUser === 2) renderType = <RouteShipper />;
 
   // Render
   return <BrowserRouter>{renderType}</BrowserRouter>;

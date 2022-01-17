@@ -1,39 +1,7 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { cartContext } from "../context/cartContext";
 import { DateFormat, PriceFormat } from "../Global/PriceFormat";
 import DetailOrder from "./DetailOrder";
-
-let listOrder = [
-  {
-    code: "a100000",
-    date: "25/10/2021",
-    totalBill: 100000,
-    status: 1,
-  },
-  {
-    code: "a100001",
-    date: "25/11/2021",
-    totalBill: 500000,
-    status: 2,
-  },
-  {
-    code: "a100002",
-    date: "25/12/2021",
-    totalBill: 800000,
-    status: 3,
-  },
-  {
-    code: "a100004",
-    date: "25/12/2021",
-    totalBill: 800000,
-    status: 4,
-  },
-  {
-    code: "a100003",
-    date: "25/01/2022",
-    totalBill: 50000,
-    status: 0,
-  },
-];
 
 const HistoryOrder = () => {
   // Render status
@@ -48,12 +16,38 @@ const HistoryOrder = () => {
       case 4:
         return <td style={{ color: "red" }}>Hoàn thành</td>;
       case 0:
-        return <td style={{ color: "gray" }}>Đã huỷ</td>;
+        return <td style={{ color: "gray" }}>Chờ thanh toán</td>;
       default:
         return null;
     }
   };
 
+  // Context
+  const { getOrderCustomer, stateCart, postPurchase } = useContext(cartContext);
+  const { user } = stateCart;
+
+  // State
+  const [listOrder, setListOrder] = useState([]);
+  // Call API
+  useEffect(async () => {
+    let response = await getOrderCustomer(user.id);
+
+    setListOrder(response.data.payload);
+  }, []);
+
+  // Handle function
+  const handleClick = async (id) => {
+    let response = await postPurchase({ order_id: id });
+
+    // window.location.href = response.data.payload.payUrl;
+    window.open(
+      response.data.payload.payUrl,
+      "_blank" // <- This is what makes it open in a new window.
+    );
+    console.log(response);
+  };
+
+  // Render
   return (
     <div className="detail-tab">
       <h3>Lịch sử đơn hàng</h3>
@@ -91,23 +85,32 @@ const HistoryOrder = () => {
           <tbody>
             {listOrder.map((item) => (
               <tr key={item.code}>
-                <th>{item.code}</th>
-                <td>{item.date}</td>
+                <th>{item.order_id}</th>
+                <td>{item.created_at}</td>
                 <td>
-                  <PriceFormat price={item.totalBill} />
+                  <PriceFormat price={item.total_amount} />
                 </td>
                 {renderStatus(item.status)}
 
                 <td>
-                  {/* Button detail */}
-                  <button
-                    type="button"
-                    className="btn btn-primary"
-                    data-bs-toggle="modal"
-                    data-bs-target={`#${item.code}`}
-                  >
-                    Chi tiết
-                  </button>
+                  <div className="d-flex">
+                    <button
+                      type="button"
+                      className="btn btn-primary"
+                      data-bs-toggle="modal"
+                      data-bs-target={`#${item.code}`}
+                    >
+                      Chi tiết
+                    </button>
+                    <button
+                      type="button"
+                      className="btn btn-invisible"
+                      onClick={() => handleClick(item.order_id)}
+                    >
+                      <i className="fa fa-money" />
+                    </button>
+                  </div>
+
                   <DetailOrder code={item.code} status={item.status} />
                 </td>
               </tr>

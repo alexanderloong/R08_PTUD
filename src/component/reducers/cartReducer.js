@@ -26,18 +26,21 @@ function cartReducer(state, action) {
         quantityItem: action.payload.quantityItem,
       };
     case CHANGE_QUANTITY_CART:
-      let index = itemCart.findIndex((obj) => obj.code === code);
+      let index = itemCart.findIndex((obj) => obj.id === code);
 
       let updItemCart = itemCart;
       updItemCart[index].quantity = quantityIt;
+
       return {
         ...state,
         itemCart: updItemCart,
       };
     case UPDATE_TOTALCART_CART:
+      console.log(action.payload);
       return {
         ...state,
-        totalCart: action.payload,
+        total_amount: action.payload,
+        quantityItem: 0,
       };
     case DELETE_ITEM_CART:
       let updItemCart2 = itemCart;

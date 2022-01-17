@@ -1,54 +1,53 @@
-import React from "react";
-import DetailOrder from "../MngStore/ModalDetailOrder";
+import React, { useContext, useState, useEffect } from "react";
+
 import { PriceFormat } from "../Global/PriceFormat";
 
-let listOrder = [
-  {
-    code: "a100000",
-    date: "58/25 Trần Quốc Thảo, p. 2, q. 3",
-    level: "Vùng đỏ",
-    totalBill: 100000,
-    status: 1,
-  },
-  {
-    code: "a100001",
-    date: "58/25 Trần Quốc Thảo, p. 2, q. 3",
-    level: "Vùng cam",
-    totalBill: 500000,
-    status: 2,
-  },
-  {
-    code: "a100002",
-    date: "58/25 Trần Quốc Thảo, p. 2, q. 3",
-    level: "Vùng vàng",
-    totalBill: 800000,
-    status: 3,
-  },
-  {
-    code: "a100004",
-    date: "58/25 Trần Quốc Thảo, p. 2, q. 3",
-    level: "Vùng Xanh",
-    totalBill: 800000,
-    status: 4,
-  },
-  {
-    code: "a100003",
-    date: "58/25 Trần Quốc Thảo, p. 2, q. 3",
-    level: "Vùng xanh",
-    totalBill: 50000,
-    status: 0,
-  },
-];
+import { cartContext } from "../context/cartContext";
 
-const DeliveryOrder = () => {
+const ReceiveOrder = () => {
+  // Context
+  const { stateCart, getOrderStore, putSuccessOrder } = useContext(cartContext);
+  const { user } = stateCart;
+
+  // State
+  const [stateOrder, setStateOrder] = useState([]);
+
+  // Call API
+
+  useEffect(async () => {
+    const response = await getOrderStore("61e18691053f796fa5d99103");
+
+    setStateOrder(response.data.payload.filter((item) => item.status === 3));
+  }, []);
+
+  console.log(stateOrder);
+
+  // Handle function
+  const handleClick = async (id) => {
+    let response = await putSuccessOrder({ order_id: id, shipper_id: user.id });
+
+    console.log(response);
+  };
+
+  // Render
   return (
     <div className="detail-tab">
-      <h3>Quản lý đơn hàng</h3>
+      <h3>Hoàn thành đơn hàng</h3>
       <hr />
       <div className="row">
         <div className="col-lg-3">
           <label>Mã đơn hàng</label>
           <input type="text" className="form-control" />
+        </div>
+        <div className="form-group col-lg-4">
+          <label>Vùng dịch</label>
+          <select className="form-select form-select-lg">
+            <option value="5">Tất cả</option>
+            <option value="1">Vùng xanh</option>
+            <option value="2">Vùng vàng</option>
+            <option value="3">Vùng cam</option>
+            <option value="4">Vùng đỏ</option>
+          </select>
         </div>
       </div>
       <hr />
@@ -57,35 +56,29 @@ const DeliveryOrder = () => {
           <thead>
             <tr>
               <th scope="col">Mã đơn hàng</th>
-              <th scope="col">Địa chỉ</th>
-              <th scope="col">Vùng dịch</th>
+              <th scope="col">Thời gian</th>
               <th scope="col">Tổng tiền</th>
-
+              <th scope="col">Trạng thái</th>
               <th scope="col">Hành động</th>
             </tr>
           </thead>
           <tbody>
-            {listOrder.map((item) => (
-              <tr key={item.code}>
-                <th>{item.code}</th>
-                <td>{item.date}</td>
-                <td>{item.level}</td>
+            {stateOrder.map((item) => (
+              <tr key={item.order_id}>
+                <th>{item.order_id}</th>
+                <td>{item.created_at}</td>
                 <td>
-                  <PriceFormat price={item.totalBill} />
+                  <PriceFormat price={item.total_amount} />
                 </td>
-
+                <td style={{ color: "#7fad39" }}>Đang giao hàng</td>
                 <td>
-                  {/* Button detail */}
                   <button
                     type="button"
                     className="btn btn-primary"
-                    data-bs-toggle="modal"
-                    data-bs-target={`#${item.code}`}
+                    onClick={() => handleClick(item.order_id)}
                   >
-                    Chi tiết
+                    Hoàn thành
                   </button>
-
-                  <DetailOrder code={item.code} status={item.status} />
                 </td>
               </tr>
             ))}
@@ -96,4 +89,4 @@ const DeliveryOrder = () => {
   );
 };
 
-export default DeliveryOrder;
+export default ReceiveOrder;

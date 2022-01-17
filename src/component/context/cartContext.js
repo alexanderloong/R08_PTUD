@@ -9,7 +9,7 @@ export const cartContext = createContext("");
 const CartContextProvider = ({ children }) => {
   // Reducer
   const [stateCart, dispatchCart] = useReducer(cartReducer, initialState);
-
+  const { user } = stateCart;
   // State
   const [stateLevel, setStateLevel] = useState([]);
   const [stateCatalog, setStateCatalog] = useState([]);
@@ -21,23 +21,24 @@ const CartContextProvider = ({ children }) => {
     let listOrder = [];
 
     while (cart.length !== 0) {
+      console.log(data[0].store_id);
+
       // Variables
-      const store_id = data[0].store;
       let order = {
         total_amount: 0,
         payment_method_id: "025980301",
-        customer_id: "61e1313994610a9f8db2d3b2",
-        store_id: store_id,
+        customer_id: user.id,
+        store_id: data[0].store_id,
         products: [],
         quantities: [],
       };
 
       // Handle
       for (let index = 0; index < cart.length; index++) {
-        if (cart[index].store === store_id) {
-          order.products.push(cart[index].code);
+        if (cart[index].store_id === data[0].store_id) {
+          order.products.push(cart[index].id);
           order.quantities.push(cart[index].quantity);
-          order.total_amount += cart[index].price * cart[index].quantity;
+          order.total_amount += cart[index].unit_price * cart[index].quantity;
           // Delete item
           cart.splice(index, 1);
 
@@ -228,6 +229,105 @@ const CartContextProvider = ({ children }) => {
       else return { success: false, message: error.message };
     }
   };
+
+  const putReceiveOrder = async (data) => {
+    try {
+      const response = await axios.put(
+        `https://localhost:44359/api/Shipper/receive_order`,
+        data
+      );
+
+      return response;
+    } catch (error) {
+      if (error.response.data) return error.response.data;
+      else return { success: false, message: error.message };
+    }
+  };
+
+  const putSuccessOrder = async (data) => {
+    try {
+      const response = await axios.put(
+        `https://localhost:44359/api/Shipper/success_order`,
+        data
+      );
+
+      return response;
+    } catch (error) {
+      if (error.response.data) return error.response.data;
+      else return { success: false, message: error.message };
+    }
+  };
+
+  const postRegisterShipper = async (data) => {
+    try {
+      const response = await axios.post(
+        `https://localhost:44359/api/Shipper/register`,
+        data
+      );
+
+      return response.data;
+    } catch (error) {
+      if (error.response.data) return error.response.data;
+      else return { success: false, message: error.message };
+    }
+  };
+
+  const postLoginShipper = async (data) => {
+    try {
+      const response = await axios.post(
+        `https://localhost:44359/api/Shipper/login`,
+        data
+      );
+
+      return response;
+    } catch (error) {
+      if (error.response.data) return error.response.data;
+      else return { success: false, message: error.message };
+    }
+  };
+
+  const postPurchase = async (data) => {
+    console.log(data);
+    try {
+      const response = await axios.post(
+        `https://localhost:44359/api/Order/purchase`,
+        data
+      );
+
+      return response;
+    } catch (error) {
+      if (error.response.data) return error.response.data;
+      else return { success: false, message: error.message };
+    }
+  };
+
+  const getDetailOrder = async (id) => {
+    try {
+      const response = await axios.get(
+        `https://localhost:44359/api/Order/get_detail_order_by_id/${id}`
+      );
+
+      return response;
+    } catch (error) {
+      if (error.response.data) return error.response.data;
+      else return { success: false, message: error.message };
+    }
+  };
+
+  const putComfirmOrderStore = async (data) => {
+    try {
+      const response = await axios.put(
+        `https://localhost:44359/api/Store/confirm_order`,
+        data
+      );
+
+      return response;
+    } catch (error) {
+      if (error.response.data) return error.response.data;
+      else return { success: false, message: error.message };
+    }
+  };
+
   // Use Effect
   useEffect(() => getAllLevel(), []);
   useEffect(() => getCatalog(), []);
@@ -252,6 +352,13 @@ const CartContextProvider = ({ children }) => {
     getOrderStore,
     getSearchProduct,
     getOrderCustomer,
+    postRegisterShipper,
+    postPurchase,
+    getDetailOrder,
+    putComfirmOrderStore,
+    putReceiveOrder,
+    postLoginShipper,
+    putSuccessOrder,
   };
 
   return (
