@@ -18,7 +18,7 @@ const MngOrder = () => {
       case 4:
         return <td style={{ color: "red" }}>Hoàn thành</td>;
       case 0:
-        return <td style={{ color: "gray" }}>Đã huỷ</td>;
+        return <td style={{ color: "gray" }}>Chờ thanh toán</td>;
       default:
         return null;
     }
